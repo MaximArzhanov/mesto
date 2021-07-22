@@ -2,13 +2,13 @@
   margin: 0;
   padding: 0;
   max-width: 282px;
-  min-height: 360px;
+  /*min-height: 360px;*/
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   list-style: none;
   border-radius: 10px;
-  background: #fff;
+  background-color: #fff;
   color: #000;
 }

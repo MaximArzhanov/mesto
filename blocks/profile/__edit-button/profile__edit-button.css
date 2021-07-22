@@ -2,11 +2,20 @@
   margin: 0;
   margin-left: 18px;
   padding: 0;
-  background: url(../../../images/edit-button.svg);
+  background: url(../../../images/edit-button.png);
   background-repeat: no-repeat;
+  background-size: 100%;
   width: 24px;
   height: 24px;
   grid-column: 2/3;
   grid-row: 1/2;
   align-self: baseline;
+}
+
+@media screen and (max-width: 767px) {
+  .profile__edit-button {
+    margin-left: 10px;
+    width: 18px;
+    height: 18px;
+  }
 }
