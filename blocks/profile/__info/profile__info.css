@@ -2,14 +2,15 @@
   margin: 0;
   margin-left: 30px;
   padding: 0;
-  /*display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  margin-right: 50px;
-  flex-shrink: 0;*/
   display: grid;
-  grid-template-columns: repeat(2, minmax(min-content, max-content));
+  grid-template-columns: minmax(min-content, max-content) minmax(min-content, max-content);
   grid-template-rows: repeat(2, minmax(min-content, max-content));
+  flex-grow: 1;
+}
 
-
+@media screen and (max-width: 767px) {
+  .profile__info {
+    margin-top: 22px;
+    margin-left: 0;
+  }
 }

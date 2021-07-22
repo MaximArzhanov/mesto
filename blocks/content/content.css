@@ -1,5 +1,6 @@
 .content {
   margin: 0;
   padding: 0;
-  max-width: 880px;
+  grid-column: 2/3;
+  grid-row: 2/3;
 }
