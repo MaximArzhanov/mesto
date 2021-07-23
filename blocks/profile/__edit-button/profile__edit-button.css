@@ -10,12 +10,12 @@
   grid-column: 2/3;
   grid-row: 1/2;
   align-self: baseline;
-  transition: opacity 0.2s linear;
+  transition: opacity .2s linear;
   cursor: pointer;
 }
 
 .profile__edit-button:hover {
-  opacity: 0.6;
+  opacity: .6;
 }
 
 @media screen and (max-width: 767px) {
