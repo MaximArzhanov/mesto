@@ -6,13 +6,9 @@
   background-size: 100%;
   width: 24px;
   height: 24px;
-  /*
-  grid-column: 2/3;
-  grid-row: 1/2;
-  align-self: baseline;
-  */
   transition: opacity .2s linear;
   cursor: pointer;
+  flex-shrink: 0;
 }
 
 .profile__edit-button:hover {

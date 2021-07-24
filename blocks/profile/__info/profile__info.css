@@ -5,11 +5,6 @@
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
-  /*
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  grid-template-rows: repeat(2, minmax(min-content, max-content));
-  */
   flex-grow: 1;
   flex-shrink: 1;
 }

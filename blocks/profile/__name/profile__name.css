@@ -6,11 +6,6 @@
   font-weight: 500;
   font-size: 42px;
   line-height: 55px;
-  /*
-  grid-column: 1/2;
-  grid-row: 1/2;
-  align-self: baseline;
-  */
 }
 
 @media screen and (max-width: 767px) {
