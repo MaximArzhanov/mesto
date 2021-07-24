@@ -3,13 +3,15 @@
   margin-left: 30px;
   padding: 0;
   display: grid;
-  grid-template-columns: minmax(min-content, max-content) minmax(min-content, max-content);
+  grid-template-columns: 1fr 2fr;
   grid-template-rows: repeat(2, minmax(min-content, max-content));
   flex-grow: 1;
+  flex-shrink: 1;
 }
 
 @media screen and (max-width: 767px) {
   .profile__info {
+    max-width: 282px;
     margin-top: 25px;
     margin-left: 0;
   }
