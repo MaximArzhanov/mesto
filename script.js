@@ -21,7 +21,7 @@ function openClosePopup() {
   fillFields();
 }
 
-// Открытие/Закрытие popup
+// Сохранить имя и описание
 function formSubmitHandler (evt) {
   evt.preventDefault();
   profileName.textContent = popupInputName.value;
