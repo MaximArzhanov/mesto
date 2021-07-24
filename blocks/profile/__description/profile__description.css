@@ -9,16 +9,19 @@
   font-weight: normal;
   font-size: 18px;
   line-height: 30px;
+  flex-basis: 100%;
+  /*
   grid-column: 1/3;
   grid-row: 2/3;
+  */
 }
 
 @media screen and (max-width: 767px) {
   .profile__description {
     max-width: 282px;
     margin-top: 10px;
-    justify-self: center;
     font-size: 14px;
     line-height: 17px;
+    text-align: center;
   }
 }
