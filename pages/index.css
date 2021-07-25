@@ -1,8 +1,8 @@
-/*  Шрифты  */
-@import url("../vendor/fonts.css");
-
 /*  Сторонние библиотеки  */
 @import url("../vendor/normalize.css");
+
+/*  Шрифты  */
+@import url("../vendor/fonts.css");
 
 /*  Общие стили страницы  */
 @import url("../blocks/root/root.css");
