@@ -6,6 +6,7 @@
   height: 50px;
   flex-grow: 0;
   flex-shrink: 0;
+  border: none;
   transition: opacity .2s linear;
   cursor: pointer;
 }
