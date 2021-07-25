@@ -1,13 +1,13 @@
-.elements__icon-like {
+.card__icon-like {
   background: url(../../../images/like.svg);
   background-size: cover;
   width: 22px;
   height: 19px;
-  margin-right: 15px;
+  margin-right: 20px;
   transition: opacity .2s linear;
   cursor: pointer;
 }
 
-.elements__icon-like:hover {
+.card__icon-like:hover {
   opacity: .5;
 }

@@ -27,13 +27,15 @@
 /*  places  */
 @import url("../blocks/places/places.css");
 
-/*  elements  */
-@import url("../blocks/elements/elements.css");
-@import url("../blocks/elements/__item/elements__item.css");
-@import url("../blocks/elements/__image/elements__image.css");
-@import url("../blocks/elements/__name/elements__name.css");
-@import url("../blocks/elements/__icon-like/elements__icon-like.css");
-@import url("../blocks/elements/__icon-like/_active/elements__icon-like_active.css");
+/*  cards  */
+@import url("../blocks/cards/cards.css");
+
+/*  card  */
+@import url("../blocks/card/card.css");
+@import url("../blocks/card/__image/card__image.css");
+@import url("../blocks/card/__name/card__name.css");
+@import url("../blocks/card/__icon-like/card__icon-like.css");
+@import url("../blocks/card/__icon-like/_active/card__icon-like_active.css");
 
 /*  footer  */
 @import url("../blocks/footer/footer.css");
