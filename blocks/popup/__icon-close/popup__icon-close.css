@@ -7,6 +7,8 @@
   position: absolute;
   top: -40px;
   left: calc(100% + 8px);
+  border: none;
+  outline: none;
   transition: opacity .2s linear;
   cursor: pointer;
 }
