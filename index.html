@@ -27,53 +27,14 @@
 
       <section class="places content__places">
         <ul class="cards">
-          <li class="card">
-            <img class="card__image"
-                 src="./images/karachaevo-cherkessia.jpg"
-                 alt="Древний, полуразрушенный храм, расположенный на вершине горы.">
-            <h2 class="card__name">Карачаево-Чeркесия</h2>
-            <button class="card__icon-like" type="button"></button>
-          </li>
-
-          <li class="card">
-            <img class="card__image"
-                 src="./images/altai.jpg"
-                 alt="Горная река, на заднем фоне заснеженные вершины гор.">
-            <h2 class="card__name">Алтай</h2>
-            <button class="card__icon-like" type="button"></button>
-          </li>
-
-          <li class="card">
-            <img class="card__image"
-                 src="./images/kamchatka.jpg"
-                 alt="Город на фоне вулкана.">
-            <h2 class="card__name">Камчатка</h2>
-            <button class="card__icon-like" type="button"></button>
-          </li>
-
-          <li class="card">
-            <img class="card__image"
-                 src="./images/ural.jpg"
-                 alt="Закат солнца над уральскими горами.">
-            <h2 class="card__name">Урал</h2>
-            <button class="card__icon-like" type="button"></button>
-          </li>
-
-          <li class="card">
-            <img class="card__image"
-                 src="./images/karelia.jpg"
-                 alt="Люди на лодке плывут по реке.">
-            <h2 class="card__name">Карелия</h2>
-            <button class="card__icon-like" type="button"></button>
-          </li>
-
-          <li class="card">
-            <img class="card__image"
-                 src="./images/baikal.jpg"
-                 alt="Машина едет по прозрачному льду замёрзшего озера.">
-            <h2 class="card__name">Байкал</h2>
-            <button class="card__icon-like" type="button"></button>
-          </li>
+          <template id="card">
+            <li class="card">
+              <img class="card__image"
+                   alt="Фотография места.">
+              <h2 class="card__name"></h2>
+              <button class="card__icon-like" type="button"></button>
+            </li>
+          </template>
         </ul>
       </section>
 
@@ -112,7 +73,7 @@
           Создать
         </button>
       </form>
-      <button class="popup__icon-close popupNewPlace" type="button"></button>
+      <button class="popup__icon-close" type="button"></button>
     </div>
   </div>
 
