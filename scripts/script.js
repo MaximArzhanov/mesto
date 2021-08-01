@@ -18,6 +18,12 @@ const popupInputNamePicture = popupAddNewPlace.querySelector('.popup__input_type
 const popupInputLink = popupAddNewPlace.querySelector('.popup__input_type_description');
 const formElementAddNewPlace = popupAddNewPlace.querySelector('.popup__form');
 
+/* Элементы popup_type_image */
+const popupViewImage = document.querySelector('.popup_type_image');
+const buttonViewImage = popupViewImage.querySelector('.popup__icon-close');
+const popupImage = popupViewImage.querySelector('.popup__image');
+const popupImageTitle = popupViewImage.querySelector('.popup__image-title');
+
 /* Элементы cards */
 const card = document.querySelector('#card').content;
 const cards = document.querySelector('.cards');
@@ -58,15 +64,27 @@ function addDefaultCards() {
   }
 }
 
-/** Добавляет карточку на страницу. Добавляет событие элементу card__icon-like */
+/** Добавляет карточку на страницу.
+ *  Добавляет событие элементам card__icon-like, card__trash, card__image */
 function addCard(name, link) {
   const cardElement = card.querySelector('.card').cloneNode(true);
   cardElement.querySelector('.card__name').textContent = name;
   cardElement.querySelector('.card__image').src = link;
   cards.prepend(cardElement);
 
-  cardElement.querySelector('.card__icon-like').addEventListener('click', (evt) => {
-    evt.target.classList.toggle('card__icon-like_active');
+  const buttonLike = cardElement.querySelector('.card__icon-like');
+  const buttonTrash = cardElement.querySelector('.card__trash');
+  const cardImage = cardElement.querySelector('.card__image');
+  buttonLike.addEventListener('click', () => {
+    buttonLike.classList.toggle('card__icon-like_active');
+  });
+  buttonTrash.addEventListener('click', () => {
+    cardElement.remove();
+  });
+  cardImage.addEventListener('click', () => {
+    popupImage.src = cardElement.querySelector('.card__image').src;
+    popupImageTitle.textContent = cardElement.querySelector('.card__name').textContent;;
+    openPopup(popupViewImage);
   });
 }
 
@@ -138,4 +156,3 @@ formElementAddNewPlace.addEventListener('submit', evt => {
 });
 
 document.addEventListener('DOMContentLoaded', addDefaultCards);
-
