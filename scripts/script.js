@@ -20,7 +20,7 @@ const formElementAddNewPlace = popupAddNewPlace.querySelector('.popup__form');
 
 /* Элементы popup_type_image */
 const popupViewImage = document.querySelector('.popup_type_image');
-const buttonViewImage = popupViewImage.querySelector('.popup__icon-close');
+const buttonCloseViewImage = popupViewImage.querySelector('.popup__icon-close');
 const popupImage = popupViewImage.querySelector('.popup__image');
 const popupImageTitle = popupViewImage.querySelector('.popup__image-title');
 
@@ -145,6 +145,10 @@ buttonCloseEditProfile.addEventListener('click', () => {
 buttonCloseAddNewPlace.addEventListener('click', () => {
   closePopup(popupAddNewPlace);
   clearFields();
+});
+
+buttonCloseViewImage.addEventListener('click', () => {
+  closePopup(popupViewImage);
 });
 
 formElementEditProfile.addEventListener('submit', evt => {
