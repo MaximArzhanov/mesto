@@ -58,12 +58,16 @@ function addDefaultCards() {
   }
 }
 
-/** Добавляет карточку на страницу. */
+/** Добавляет карточку на страницу. Добавляет событие элементу card__icon-like */
 function addCard(name, link) {
   const cardElement = card.querySelector('.card').cloneNode(true);
   cardElement.querySelector('.card__name').textContent = name;
   cardElement.querySelector('.card__image').src = link;
   cards.prepend(cardElement);
+
+  cardElement.querySelector('.card__icon-like').addEventListener('click', (evt) => {
+    evt.target.classList.toggle('card__icon-like_active');
+  });
 }
 
 /** Записывает имя и описание в поля формы окна popup_type_edit-profile. */
