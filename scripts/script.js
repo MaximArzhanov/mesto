@@ -28,35 +28,6 @@ const popupImageTitle = popupViewImage.querySelector('.popup__image-title');
 const card = document.querySelector('#card').content;
 const cards = document.querySelector('.cards');
 
-
-/* Массив карточек (по-умолчанию). */
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
 /** Добавляет карточки, заданные по-умолчанию, на страницу. */
 function addDefaultCards() {
   for (let i = 0; i < initialCards.length; i++) {
@@ -94,12 +65,6 @@ function fillFields() {
   popupInputDescription.value = profileDescription.textContent;
 }
 
-/** Очищает поля формы окна popup_type_add-new-place. */
-function clearFields() {
-  popupInputNamePicture.value = "";
-  popupInputLink.value = "";
-}
-
 /** Открывает popup. */
 function openPopup(popup) {
   popup.classList.add('popup_opened');
@@ -118,12 +83,14 @@ function formEditProfileSubmitHandler (evt, popup) {
   closePopup(popup);
 }
 
-/** Вызывает метод addCard. */
+/** Вызывает метод addCard.
+ *  Очищает поля формы окна popup_type_add-new-place.
+ */
 function formAddNewPlaceSubmitHandler (evt, popup) {
   evt.preventDefault();
   addCard(popupInputNamePicture.value, popupInputLink.value);
   closePopup(popup);
-  clearFields();
+  popupInputNamePicture.closest('.popup__form').reset();
 }
 
 
@@ -144,7 +111,7 @@ buttonCloseEditProfile.addEventListener('click', () => {
 
 buttonCloseAddNewPlace.addEventListener('click', () => {
   closePopup(popupAddNewPlace);
-  clearFields();
+  popupInputNamePicture.closest('.popup__form').reset();
 });
 
 buttonCloseViewImage.addEventListener('click', () => {
