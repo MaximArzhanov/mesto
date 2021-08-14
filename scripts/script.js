@@ -35,28 +35,12 @@ function addDefaultCards() {
   }
 }
 
-/** Добавляет карточку на страницу.
- *  Добавляет событие элементам card__icon-like, card__trash, card__image */
+/** Добавляет карточку на страницу. */
 function addCard(name, link) {
   const cardElement = card.querySelector('.card').cloneNode(true);
   cardElement.querySelector('.card__name').textContent = name;
   cardElement.querySelector('.card__image').src = link;
   cards.prepend(cardElement);
-
-  const buttonLike = cardElement.querySelector('.card__icon-like');
-  const buttonTrash = cardElement.querySelector('.card__trash');
-  const cardImage = cardElement.querySelector('.card__image');
-  buttonLike.addEventListener('click', () => {
-    buttonLike.classList.toggle('card__icon-like_active');
-  });
-  buttonTrash.addEventListener('click', () => {
-    cardElement.remove();
-  });
-  cardImage.addEventListener('click', () => {
-    popupImage.src = cardElement.querySelector('.card__image').src;
-    popupImageTitle.textContent = cardElement.querySelector('.card__name').textContent;;
-    openPopup(popupViewImage);
-  });
 }
 
 /** Записывает имя и описание в поля формы окна popup_type_edit-profile. */
@@ -93,7 +77,6 @@ function formAddNewPlaceSubmitHandler (evt, popup) {
   popupInputNamePicture.closest('.popup__form').reset();
 }
 
-
 // Добавление обработчиков событий элементам
 
 buttonEditProfile.addEventListener('click', () => {
@@ -124,6 +107,18 @@ formElementEditProfile.addEventListener('submit', evt => {
 
 formElementAddNewPlace.addEventListener('submit', evt => {
   formAddNewPlaceSubmitHandler(evt, popupAddNewPlace);
+});
+
+cards.addEventListener('click', (evt) => {
+  if (evt.target.classList.contains('card__icon-like')) { // Поставить like
+    evt.target.classList.toggle('card__icon-like_active');
+  } else if (evt.target.classList.contains('card__trash')) {  // Удалить карточку
+    evt.target.closest('.card').remove();
+  } else if (evt.target.classList.contains('card__image')) {  // Увеличить изображение
+    popupImage.src = evt.target.src;
+    popupImageTitle.textContent = evt.target.nextElementSibling.textContent;
+    openPopup(popupViewImage);
+  }
 });
 
 document.addEventListener('DOMContentLoaded', addDefaultCards);
