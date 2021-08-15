@@ -167,6 +167,12 @@ const enableValidation = () => {
   });
 };
 
+document.addEventListener('click', (evt) => {
+  if (evt.target.classList.contains('popup')) {
+    closePopup(evt.target);
+  }
+});
+
 buttonEditProfile.addEventListener('click', () => {
   openPopup(popupEditProfile);
   fillFields();
