@@ -9,6 +9,13 @@
   flex-shrink: 1;
 }
 
+/* Помогает перенести элемент description на новую строку */
+.profile__info::after {
+  order: 1;
+  content: '';
+  width: 100%;
+}
+
 @media screen and (max-width: 767px) {
   .profile__info {
     max-width: 282px;
