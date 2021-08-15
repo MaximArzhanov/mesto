@@ -173,6 +173,13 @@ document.addEventListener('click', (evt) => {
   }
 });
 
+document.addEventListener('keydown', (evt) => {
+  const popup = document.querySelector('.popup_opened');
+  if (popup !== null && evt.key === 'Escape') {
+    closePopup(popup);
+  }
+});
+
 buttonEditProfile.addEventListener('click', () => {
   openPopup(popupEditProfile);
   fillFields();
