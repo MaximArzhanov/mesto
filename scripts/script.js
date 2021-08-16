@@ -1,32 +1,33 @@
-/* Элементы profile */
+/* Элементы profile. */
 const profileName = document.querySelector('.profile__name');
 const profileDescription = document.querySelector('.profile__description');
 const buttonEditProfile = document.querySelector('.profile__edit-button');
 const buttonAddNewPlace = document.querySelector('.profile__add-button');
 
-/* Элементы popup_type_edit-profile */
+/* Элементы popup_type_edit-profile. */
 const popupEditProfile = document.querySelector('.popup_type_edit-profile');
 const buttonCloseEditProfile = popupEditProfile.querySelector('.popup__icon-close');
 const popupInputNameProfile = popupEditProfile.querySelector('.popup__input_type_name');
 const popupInputDescription = popupEditProfile.querySelector('.popup__input_type_description');
 const formElementEditProfile = popupEditProfile.querySelector('.popup__form');
 
-/* Элементы popup_type_add-new-place */
+/* Элементы popup_type_add-new-place. */
 const popupAddNewPlace = document.querySelector('.popup_type_add-new-place');
 const buttonCloseAddNewPlace = popupAddNewPlace.querySelector('.popup__icon-close');
 const popupInputNamePicture = popupAddNewPlace.querySelector('.popup__input_type_name');
 const popupInputLink = popupAddNewPlace.querySelector('.popup__input_type_description');
 const formElementAddNewPlace = popupAddNewPlace.querySelector('.popup__form');
 
-/* Элементы popup_type_image */
+/* Элементы popup_type_image. */
 const popupViewImage = document.querySelector('.popup_type_image');
 const buttonCloseViewImage = popupViewImage.querySelector('.popup__icon-close');
 const popupImage = popupViewImage.querySelector('.popup__image');
 const popupImageTitle = popupViewImage.querySelector('.popup__image-title');
 
-/* Элементы cards */
+/* Элементы cards. */
 const card = document.querySelector('#card').content;
 const cards = document.querySelector('.cards');
+
 
 /** Добавляет карточки, заданные по-умолчанию, на страницу. */
 function addDefaultCards() {
@@ -59,72 +60,10 @@ function closePopup(popup) {
   popup.classList.remove('popup_opened');
 }
 
-/** Показывает текст ошибки. */
-const showInputError = (formElement, inputElement, errorMessage) => {
-  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.add('popup__input_type_error');
-  errorElement.textContent = errorMessage;
-  errorElement.classList.add('popup__input-error_active');
-};
-
-/** Прячет текст ошибки. */
-const hideInputError = (formElement, inputElement) => {
-  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.remove('popup__input_type_error');
-  errorElement.classList.remove('popup__input-error_active');
-  errorElement.textContent = '';
-};
-
-/** Проверяет каждое поле ввода.
- *  Показывает результат проверки.
- */
-const checkInputValidity = (formElement, inputElement) => {
-  if (!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, inputElement.validationMessage);
-  } else {
-    hideInputError(formElement, inputElement);
-  }
-};
-
-/** Проверяет наличие ошибок в заполнении формы. */
-const hasInvalidInput = (inputList) => {
-  return inputList.some((inputElement) => {
-    return !inputElement.validity.valid;
-  });
-};
-
-/** Если форма заполнена с ошибками - выключает кнопку.
- *  Если форма заполнена без ошибок - включает кнопку
- */
-const toggleButtonState = (inputList, buttonElement) => {
-  if (hasInvalidInput(inputList)) {
-    buttonElement.classList.add('popup__button_inactive');
-    buttonElement.setAttribute("disabled", "disabled");
-  } else {
-    buttonElement.classList.remove('popup__button_inactive');
-    buttonElement.removeAttribute('disabled');
-  }
-}
-
-/** Добавляет обработчик событий каждому полю ввода в форме. */
-const setEventListeners = (formElement) => {
-  const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
-  const buttonElement = formElement.querySelector('.popup__button');
-
-  toggleButtonState(inputList, buttonElement);
-
-  inputList.forEach((inputElement) => {
-    inputElement.addEventListener('input', function () {
-      checkInputValidity(formElement, inputElement);
-      toggleButtonState(inputList, buttonElement);
-    });
-  });
-};
-
 /** Если форма заполнена без ошибок,
  *  то сохраняет имя и описание в профиле.
  */
-const formEditProfileSubmitHandler = (popup, formElement) => {
+const writeDataProfile = (popup, formElement) => {
   const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
   if (!hasInvalidInput(inputList)) {
     profileName.textContent = popupInputNameProfile.value;
@@ -137,7 +76,7 @@ const formEditProfileSubmitHandler = (popup, formElement) => {
  *  то добавляет новую карточку на страницу.
  *  Сбрасывает поля формы.
  */
-const formAddNewPlaceSubmitHandler = (popup, formElement) => {
+const addCardOnPage = (popup, formElement) => {
   const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
   if (!hasInvalidInput(inputList)) {
     addCard(popupInputNamePicture.value, popupInputLink.value);
@@ -147,32 +86,16 @@ const formAddNewPlaceSubmitHandler = (popup, formElement) => {
 }
 
 
-// Добавление обработчиков событий элементам
+// Добавление обработчиков событий элементам.
 
-/** Добавляет обработчик событий каждой форме. */
-const enableValidation = () => {
-  const formList = Array.from(document.querySelectorAll('.popup__form'));
-  formList.forEach((formElement) => {
-    formElement.addEventListener('submit', function (evt) {
-      evt.preventDefault();
-      if (evt.currentTarget.closest('.popup').classList.contains('popup_type_edit-profile')) {
-        formEditProfileSubmitHandler(popupEditProfile, formElement);
-      }
-      if (evt.currentTarget.closest('.popup').classList.contains('popup_type_add-new-place')) {
-        formAddNewPlaceSubmitHandler(popupAddNewPlace, formElement);
-      }
-    });
-
-    setEventListeners(formElement);
-  });
-};
-
+/** Закрытие popup кликом мышью по фону. */
 document.addEventListener('click', (evt) => {
   if (evt.target.classList.contains('popup')) {
     closePopup(evt.target);
   }
 });
 
+/** Закрытие popup нажатием Esc. */
 document.addEventListener('keydown', (evt) => {
   const popup = document.querySelector('.popup_opened');
   if (popup !== null && evt.key === 'Escape') {
@@ -180,30 +103,37 @@ document.addEventListener('keydown', (evt) => {
   }
 });
 
+/** Открытие popup. */
 buttonEditProfile.addEventListener('click', () => {
   openPopup(popupEditProfile);
   fillFields();
-  enableValidation();
+  enableValidation(validateConfig);
 });
 
+/** Открытие popup добавления карточки. */
 buttonAddNewPlace.addEventListener('click', () => {
   openPopup(popupAddNewPlace);
-  enableValidation();
+  enableValidation(validateConfig);
 });
 
+/** Закрытие popup редактирования профиля. */
 buttonCloseEditProfile.addEventListener('click', () => {
   closePopup(popupEditProfile);
+
 });
 
+/** Закрытие popup добавления карточки. */
 buttonCloseAddNewPlace.addEventListener('click', () => {
   closePopup(popupAddNewPlace);
   popupInputNamePicture.closest('.popup__form').reset();
 });
 
+/** Закрытие popup просмотра изображения. */
 buttonCloseViewImage.addEventListener('click', () => {
   closePopup(popupViewImage);
 });
 
+/** События элементов на карточке. */
 cards.addEventListener('click', (evt) => {
   if (evt.target.classList.contains('card__icon-like')) { // Поставить like
     evt.target.classList.toggle('card__icon-like_active');
