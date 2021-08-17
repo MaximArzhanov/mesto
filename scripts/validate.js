@@ -66,15 +66,8 @@ const enableValidation = (validateConfig) => {
   const formList = Array.from(document.querySelectorAll(validateConfig.formSelector));
   formList.forEach((formElement) => {
     formElement.addEventListener('submit', function (evt) {
-      evt.preventDefault();
-      if (evt.currentTarget.closest('.popup').classList.contains('popup_type_edit-profile')) {
-        writeDataProfile(popupEditProfile, formElement);
-      }
-      if (evt.currentTarget.closest('.popup').classList.contains('popup_type_add-new-place')) {
-        addCardOnPage(popupAddNewPlace, formElement);
-      }
+        evt.preventDefault();
     });
-
     setEventListeners(formElement, validateConfig);
   });
 };

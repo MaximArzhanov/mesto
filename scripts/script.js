@@ -30,14 +30,14 @@ const cards = document.querySelector('.cards');
 
 
 /** Добавляет карточки, заданные по-умолчанию, на страницу. */
-function addDefaultCards() {
+const addDefaultCards = () => {
   for (let i = 0; i < initialCards.length; i++) {
     addCard(initialCards[i].name, initialCards[i].link);
   }
 }
 
 /** Добавляет карточку на страницу. */
-function addCard(name, link) {
+const addCard = (name, link) => {
   const cardElement = card.querySelector('.card').cloneNode(true);
   cardElement.querySelector('.card__name').textContent = name;
   cardElement.querySelector('.card__image').src = link;
@@ -45,19 +45,19 @@ function addCard(name, link) {
 }
 
 /** Записывает имя и описание в поля формы окна popup_type_edit-profile. */
-function fillFields() {
+const fillFields = () => {
   popupInputNameProfile.value = profileName.textContent;
   popupInputDescription.value = profileDescription.textContent;
 }
 
 /** Открывает popup. */
-function openPopup(popup) {
+const openPopup = (popup) => {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', closeByEscape);
 }
 
 /** Закрывает popup. */
-function closePopup(popup) {
+const closePopup = (popup) => {
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', closeByEscape);
 }
@@ -65,38 +65,48 @@ function closePopup(popup) {
 /** Если форма заполнена без ошибок,
  *  то сохраняет имя и описание в профиле.
  */
-const writeDataProfile = (popup, formElement) => {
-  const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
-  if (!hasInvalidInput(inputList)) {
-    profileName.textContent = popupInputNameProfile.value;
-    profileDescription.textContent = popupInputDescription.value;
-    closePopup(popup);
-  }
+const writeDataProfile = (evt) => {
+  profileName.textContent = popupInputNameProfile.value;
+  profileDescription.textContent = popupInputDescription.value;
+  closePopup(evt.target.closest('.popup'));
 }
 
 /** Если форма заполнена без ошибок,
  *  то добавляет новую карточку на страницу.
  *  Сбрасывает поля формы.
  */
-const addCardOnPage = (popup, formElement) => {
-  const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
-  if (!hasInvalidInput(inputList)) {
-    addCard(popupInputNamePicture.value, popupInputLink.value);
-    popupInputNamePicture.closest('.popup__form').reset();
-    closePopup(popup);
-  }
+const addCardOnPage = (evt) => {
+  addCard(popupInputNamePicture.value, popupInputLink.value);
+  popupInputNamePicture.closest('.popup__form').reset();
+  closePopup(evt.target.closest('.popup'));
 }
 
 /** Закрытие popup нажатием Esc. */
-function closeByEscape(evt) {
+const closeByEscape = (evt) => {
   if (evt.key === 'Escape') {
     const openedPopup = document.querySelector('.popup_opened');
     closePopup(openedPopup);
   }
 }
 
+/** Прячет ошибки валидации. */ //При повторном открытии popup оставались ошибки валидации.
+const hideError = (popup) => {
+  const formElement = popup.querySelector(validateConfig.formSelector);
+  const inputList = Array.from(formElement.querySelectorAll(validateConfig.inputSelector));
+  inputList.forEach((inputElement) => {
+    hideInputError(formElement, inputElement, validateConfig);
+  });
+}
+
+
 
 // Добавление обработчиков событий элементам.
+
+/** Нажатие на кнопку формы редактирования профиля. */
+formElementEditProfile.addEventListener('submit', writeDataProfile);
+
+/** Нажатие на кнопку формы добавления новой карточки. */
+formElementAddNewPlace.addEventListener('submit', addCardOnPage);
 
 /** Закрытие popup кликом мышью по фону. */
 document.addEventListener('click', (evt) => {
@@ -109,19 +119,18 @@ document.addEventListener('click', (evt) => {
 buttonEditProfile.addEventListener('click', () => {
   openPopup(popupEditProfile);
   fillFields();
-  enableValidation(validateConfig);
+  hideError(popupEditProfile);
 });
 
 /** Открытие popup добавления карточки. */
 buttonAddNewPlace.addEventListener('click', () => {
   openPopup(popupAddNewPlace);
-  enableValidation(validateConfig);
+  hideError(popupAddNewPlace);
 });
 
 /** Закрытие popup редактирования профиля. */
 buttonCloseEditProfile.addEventListener('click', () => {
   closePopup(popupEditProfile);
-
 });
 
 /** Закрытие popup добавления карточки. */
@@ -150,3 +159,4 @@ cards.addEventListener('click', (evt) => {
 
 document.addEventListener('DOMContentLoaded', addDefaultCards);
 
+enableValidation(validateConfig);
