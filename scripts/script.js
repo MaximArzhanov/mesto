@@ -53,11 +53,13 @@ function fillFields() {
 /** Открывает popup. */
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', closeByEscape);
 }
 
 /** Закрывает popup. */
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closeByEscape);
 }
 
 /** Если форма заполнена без ошибок,
@@ -85,6 +87,14 @@ const addCardOnPage = (popup, formElement) => {
   }
 }
 
+/** Закрытие popup нажатием Esc. */
+function closeByEscape(evt) {
+  if (evt.key === 'Escape') {
+    const openedPopup = document.querySelector('.popup_opened');
+    closePopup(openedPopup);
+  }
+}
+
 
 // Добавление обработчиков событий элементам.
 
@@ -92,14 +102,6 @@ const addCardOnPage = (popup, formElement) => {
 document.addEventListener('click', (evt) => {
   if (evt.target.classList.contains('popup')) {
     closePopup(evt.target);
-  }
-});
-
-/** Закрытие popup нажатием Esc. */
-document.addEventListener('keydown', (evt) => {
-  const popup = document.querySelector('.popup_opened');
-  if (popup !== null && evt.key === 'Escape') {
-    closePopup(popup);
   }
 });
 
