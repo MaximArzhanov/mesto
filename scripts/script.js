@@ -95,6 +95,14 @@ const hideError = (popup) => {
   });
 }
 
+/** Активирует/Деактивирует кнопку на форме. */
+const setButtonState = (popup) => {
+  const formElement = popup.querySelector(validateConfig.formSelector);
+  const inputList = Array.from(formElement.querySelectorAll(validateConfig.inputSelector));
+  const buttonElement = formElement.querySelector(validateConfig.submitButtonSelector);
+  toggleButtonState(inputList, buttonElement, validateConfig);
+}
+
 
 
 // Добавление обработчиков событий элементам.
@@ -110,12 +118,14 @@ buttonEditProfile.addEventListener('click', () => {
   openPopup(popupEditProfile);
   fillFields();
   hideError(popupEditProfile);
+  setButtonState(popupEditProfile);
 });
 
 /** Открытие popup добавления карточки. */
 buttonAddNewPlace.addEventListener('click', () => {
   openPopup(popupAddNewPlace);
   hideError(popupAddNewPlace);
+  setButtonState(popupAddNewPlace);
 });
 
 /** Добавление обработчиков события при закрытии popup. */
