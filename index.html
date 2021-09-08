@@ -27,15 +27,6 @@
 
       <section class="places content__places">
         <ul class="cards">
-          <template id="card">
-            <li class="card">
-              <img class="card__image"
-                   alt="Фотография места.">
-              <h2 class="card__name"></h2>
-              <button class="card__icon-like" type="button"></button>
-              <button class="card__trash" type="button"></button>
-            </li>
-          </template>
         </ul>
       </section>
 
@@ -96,8 +87,20 @@
     </div>
   </div>
 
+  <template class="card-template card-template_type_default">
+    <li class="card">
+      <img class="card__image"
+           src="#"
+           alt="Фотография места.">
+      <h2 class="card__name"></h2>
+      <button class="card__icon-like" type="button"></button>
+      <button class="card__trash" type="button"></button>
+    </li>
+  </template>
+
   <script src="./scripts/data.js"></script>
   <script src="./scripts/validate.js"></script>
+  <script src="./scripts/Card.js"></script>
   <script src="./scripts/script.js"></script>
 
 </body>
