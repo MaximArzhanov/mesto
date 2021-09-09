@@ -20,9 +20,7 @@ const popupImage = popupViewImage.querySelector('.popup__image');
 const popupImageTitle = popupViewImage.querySelector('.popup__image-title');
 
 /* Элементы cards. */
-const card = document.querySelector('.card-template').content;
 const cards = document.querySelector('.cards');
-
 
 
 /** Записывает имя и описание в поля формы окна popup_type_edit-profile. */
@@ -43,8 +41,7 @@ const closePopup = (popup) => {
   document.removeEventListener('keydown', closeByEscape);
 }
 
-/** Если форма заполнена без ошибок,
- *  то сохраняет имя и описание в профиле.
+/** Сохраняет имя и описание в профиле.
  */
 const writeDataProfile = (evt) => {
   profileName.textContent = popupInputNameProfile.value;
@@ -60,35 +57,24 @@ const closeByEscape = (evt) => {
   }
 }
 
-/** Прячет ошибки валидации. */ //При повторном открытии popup оставались ошибки валидации.
-const hideError = (popup) => {
-  const formElement = popup.querySelector(validateConfig.formSelector);
-  const inputList = Array.from(formElement.querySelectorAll(validateConfig.inputSelector));
-  inputList.forEach((inputElement) => {
-    hideInputError(formElement, inputElement, validateConfig);
-  });
-}
-
-/** Активирует/Деактивирует кнопку на форме. */
+/** Деактивирует кнопку на форме. */
 const setButtonState = (popup) => {
   const formElement = popup.querySelector(validateConfig.formSelector);
-  const inputList = Array.from(formElement.querySelectorAll(validateConfig.inputSelector));
   const buttonElement = formElement.querySelector(validateConfig.submitButtonSelector);
-  toggleButtonState(inputList, buttonElement, validateConfig);
+  buttonElement.classList.add(validateConfig.inactiveButtonClass);
+  buttonElement.setAttribute("disabled", "disabled");
 }
 
 /** Открытие popup редактирования профиля. */
 buttonEditProfile.addEventListener('click', () => {
   openPopup(popupEditProfile);
   fillFields();
-  hideError(popupEditProfile);
   setButtonState(popupEditProfile);
 });
 
 /** Открытие popup добавления карточки. */
 buttonAddNewPlace.addEventListener('click', () => {
   openPopup(popupAddNewPlace);
-  hideError(popupAddNewPlace);
   setButtonState(popupAddNewPlace);
 });
 
@@ -165,4 +151,8 @@ const addEventClosePopup = () => {
 
 addEventClosePopup();
 
-enableValidation(validateConfig);
+const formList = Array.from(document.querySelectorAll(validateConfig.formSelector));
+formList.forEach((form) => {
+  const formValid = new FormValidator(validateConfig, form);
+  formValid.enableValidation();
+});

@@ -15,6 +15,10 @@ class Card {
     return cardElement;
   }
 
+  /** Создаёт карточку.
+   *
+   * @returns Созданный элемент карточки.
+   */
   generateCard = () => {
     this._element = this._getTemplate();
     this._setEventListeners();
