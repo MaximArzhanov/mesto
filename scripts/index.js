@@ -1,3 +1,8 @@
+import { initialCards, validateConfig } from './data.js'
+import { Card } from './Card.js'
+import { FormValidator } from './FormValidator.js'
+
+
 /* Элементы profile. */
 const profileName = document.querySelector('.profile__name');
 const profileDescription = document.querySelector('.profile__description');
