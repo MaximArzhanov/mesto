@@ -17,6 +17,8 @@ const formElementEditProfile = popupEditProfile.querySelector('.popup__form');
 
 /* Элементы popup_type_add-new-place. */
 const popupAddNewPlace = document.querySelector('.popup_type_add-new-place');
+const popupInputNamePicture = popupAddNewPlace.querySelector('.popup__input_type_name');
+const popupInputLinkPicture = popupAddNewPlace.querySelector('.popup__input_type_link');
 const formElementAddNewPlace = popupAddNewPlace.querySelector('.popup__form');
 
 /* Элементы popup_type_image. */
@@ -91,12 +93,10 @@ const createCardData = (name, link) => {
 }
 
 /** Обрабатывает событие при нажатии на кнопку создания новой карточки. */
-const handleSubmitAddNewPlace = (evt) => {
-  const popupInputNamePicture = evt.target.querySelector('.popup__input_type_name');
-  const popupInputLink = evt.target.querySelector('.popup__input_type_description');
-  addCard(createCardData(popupInputNamePicture.value, popupInputLink.value));
-  evt.target.closest('.popup__form').reset();
-  closePopup(evt.target.closest('.popup'));
+const handleSubmitAddNewPlace = () => {
+  addCard(createCardData(popupInputNamePicture.value, popupInputLinkPicture.value));
+  formElementAddNewPlace.reset();
+  closePopup(popupAddNewPlace);
 }
 
 /** Добавляет карточки при загрузке страницы. */
