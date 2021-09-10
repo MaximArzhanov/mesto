@@ -63,24 +63,22 @@ const closeByEscape = (evt) => {
 }
 
 /** Деактивирует кнопку на форме. */
-const setButtonState = (popup) => {
-  const formElement = popup.querySelector(validateConfig.formSelector);
-  const buttonElement = formElement.querySelector(validateConfig.submitButtonSelector);
-  buttonElement.classList.add(validateConfig.inactiveButtonClass);
-  buttonElement.setAttribute("disabled", "disabled");
+const disableSubmitButton = (form) => {
+  const formValid = new FormValidator(validateConfig, form);
+  formValid.disableButtonState();
 }
 
 /** Открытие popup редактирования профиля. */
 buttonEditProfile.addEventListener('click', () => {
   openPopup(popupEditProfile);
   fillProfileFields();
-  setButtonState(popupEditProfile);
+  disableSubmitButton(formElementEditProfile);
 });
 
 /** Открытие popup добавления карточки. */
 buttonAddNewPlace.addEventListener('click', () => {
   openPopup(popupAddNewPlace);
-  setButtonState(popupAddNewPlace);
+  disableSubmitButton(formElementAddNewPlace);
 });
 
 /** Создаёт объект с данными для карточки. */

@@ -47,19 +47,30 @@ class FormValidator {
     });
   }
 
+  /** Выключает кнопку. */
+  disableButtonState = () => {
+    this._buttonElement.classList.add(this._inactiveButtonClass);
+    this._buttonElement.setAttribute("disabled", "disabled");
+  }
+
+  /** Включает кнопку. */
+  enableButtonState = () => {
+    this._buttonElement.classList.remove(this._inactiveButtonClass);
+    this._buttonElement.removeAttribute('disabled');
+  }
+
   /** Если форма заполнена с ошибками - выключает кнопку.
    *  Если форма заполнена без ошибок - включает кнопку.
    */
   _toggleButtonState = () => {
     if (this._hasInvalidInput()) {
-      this._buttonElement.classList.add(this._inactiveButtonClass);
-      this._buttonElement.setAttribute("disabled", "disabled");
+      this.disableButtonState();
     } else {
-      this._buttonElement.classList.remove(this._inactiveButtonClass);
-      this._buttonElement.removeAttribute('disabled');
+      this.enableButtonState();
     }
   }
 
+   /** Выключает стандартную валидацию формы. */
   _disableDefaultHandler = () => {
     this._form.addEventListener('submit', function (evt) {
       evt.preventDefault();
