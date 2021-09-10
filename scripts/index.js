@@ -29,7 +29,7 @@ const cards = document.querySelector('.cards');
 
 
 /** Записывает имя и описание в поля формы окна popup_type_edit-profile. */
-const fillFields = () => {
+const fillProfileFields = () => {
   popupInputNameProfile.value = profileName.textContent;
   popupInputDescription.value = profileDescription.textContent;
 }
@@ -73,7 +73,7 @@ const setButtonState = (popup) => {
 /** Открытие popup редактирования профиля. */
 buttonEditProfile.addEventListener('click', () => {
   openPopup(popupEditProfile);
-  fillFields();
+  fillProfileFields();
   setButtonState(popupEditProfile);
 });
 
