@@ -1,22 +1,27 @@
 class FormValidator {
   constructor(validateConfig, form) {
-    this._validateConfig = validateConfig;
+    this._formSelector = validateConfig.formSelector;
+    this._inputSelector = validateConfig.inputSelector;
+    this._submitButtonSelector = validateConfig.submitButtonSelector;
+    this._inactiveButtonClass = validateConfig.inactiveButtonClass;
+    this._inputErrorClass = validateConfig.inputErrorClass;
+    this._errorClass = validateConfig.errorClass;
     this._form = form;
   }
 
   /** Показывает текст ошибки. */
   _showInputError = (inputElement, errorMessage) => {
     const errorElement = this._form.querySelector(`.${inputElement.id}-error`);
-    inputElement.classList.add(this._validateConfig.inputErrorClass);
+    inputElement.classList.add(this._inputErrorClass);
     errorElement.textContent = errorMessage;
-    errorElement.classList.add(this._validateConfig.errorClass);
+    errorElement.classList.add(this._errorClass);
   }
 
   /** Прячет текст ошибки. */
   _hideInputError = (inputElement) => {
     const errorElement = this._form.querySelector(`.${inputElement.id}-error`);
-    inputElement.classList.remove(this._validateConfig.inputErrorClass);
-    errorElement.classList.remove(this._validateConfig.errorClass);
+    inputElement.classList.remove(this._inputErrorClass);
+    errorElement.classList.remove(this._errorClass);
     errorElement.textContent = '';
   }
 
@@ -44,10 +49,10 @@ class FormValidator {
    */
   _toggleButtonState = (inputList, buttonElement) => {
     if (this._hasInvalidInput(inputList)) {
-      buttonElement.classList.add(this._validateConfig.inactiveButtonClass);
+      buttonElement.classList.add(this._inactiveButtonClass);
       buttonElement.setAttribute("disabled", "disabled");
     } else {
-      buttonElement.classList.remove(this._validateConfig.inactiveButtonClass);
+      buttonElement.classList.remove(this._inactiveButtonClass);
       buttonElement.removeAttribute('disabled');
     }
   }
@@ -60,8 +65,8 @@ class FormValidator {
 
   /** Добавляет обработчик событий каждому полю ввода в форме. */
   _setEventListeners = () => {
-    const inputList = Array.from(this._form.querySelectorAll(this._validateConfig.inputSelector));
-    const buttonElement = this._form.querySelector(this._validateConfig.submitButtonSelector);
+    const inputList = Array.from(this._form.querySelectorAll(this._inputSelector));
+    const buttonElement = this._form.querySelector(this._submitButtonSelector);
 
     this._toggleButtonState(inputList, buttonElement);
 
