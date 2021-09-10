@@ -1,6 +1,7 @@
 import { initialCards, validateConfig } from './data.js'
 import { Card } from './Card.js'
 import { FormValidator } from './FormValidator.js'
+import { openPopup, closePopup } from './utils.js'
 
 
 /* Элементы profile. */
@@ -36,32 +37,12 @@ const fillProfileFields = () => {
   popupInputDescription.value = profileDescription.textContent;
 }
 
-/** Открывает popup. */
-const openPopup = (popup) => {
-  popup.classList.add('popup_opened');
-  document.addEventListener('keydown', closeByEscape);
-}
-
-/** Закрывает popup. */
-const closePopup = (popup) => {
-  popup.classList.remove('popup_opened');
-  document.removeEventListener('keydown', closeByEscape);
-}
-
 /** Сохраняет имя и описание в профиле.
  */
 const writeDataProfile = (evt) => {
   profileName.textContent = popupInputNameProfile.value;
   profileDescription.textContent = popupInputDescription.value;
   closePopup(evt.target.closest('.popup'));
-}
-
-/** Закрытие popup нажатием Esc. */
-const closeByEscape = (evt) => {
-  if (evt.key === 'Escape') {
-    const openedPopup = document.querySelector('.popup_opened');
-    closePopup(openedPopup);
-  }
 }
 
 /** Деактивирует кнопку на форме. */
@@ -106,15 +87,6 @@ const addDefaultCards = () => {
   });
 }
 
-/** Обработчик события при нажатии на изображение карточки.
- *  Открывает popup с увеличенным изображением.
- */
-const handleImageClick = (evt) => {
-  popupImage.src = evt.target.src;
-  popupImageTitle.textContent = evt.target.nextElementSibling.textContent;
-  openPopup(popupViewImage);
-}
-
 /** Добавляет карточку на страницу. */
 const addCard = (data) => {
   cards.prepend(createCard(data));
@@ -124,7 +96,6 @@ const addCard = (data) => {
 const createCard = (data) => {
   const card = new Card(data, '.card-template_type_default');
   const cardElement = card.generateCard();
-  cardElement.querySelector('.card__image').addEventListener('click', handleImageClick);
   return cardElement;
 }
 
@@ -159,3 +130,5 @@ formList.forEach((form) => {
   const formValid = new FormValidator(validateConfig, form);
   formValid.enableValidation();
 });
+
+export { popupViewImage, popupImage, popupImageTitle }

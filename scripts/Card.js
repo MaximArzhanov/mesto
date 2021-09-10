@@ -1,3 +1,5 @@
+import { openPopup, createPopupViewImage } from './utils.js'
+
 class Card {
   constructor(data, cardSelector) {
     this._name = data.name;
@@ -37,6 +39,10 @@ class Card {
     this._element.querySelector('.card__trash').addEventListener('click', () => {
       this._handleTrashClick();
     });
+
+    this._element.querySelector('.card__image').addEventListener('click', () => {
+      this._handleImageClick();
+    });
   }
 
   _handleLikeClick = () => {
@@ -48,7 +54,10 @@ class Card {
     this._element.remove();
   }
 
-}
+  _handleImageClick = () => {
+    openPopup(createPopupViewImage(this._name, this._link));
+  }
 
+}
 
 export { Card };
