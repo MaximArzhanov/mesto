@@ -91,7 +91,7 @@ const createCardData = (name, link) => {
 }
 
 /** Обрабатывает событие при нажатии на кнопку создания новой карточки. */
-const handleSubmitAddNewPlaceClick = (evt) => {
+const handleSubmitAddNewPlace = (evt) => {
   const popupInputNamePicture = evt.target.querySelector('.popup__input_type_name');
   const popupInputLink = evt.target.querySelector('.popup__input_type_description');
   addCard(createCardData(popupInputNamePicture.value, popupInputLink.value));
@@ -135,7 +135,7 @@ document.addEventListener('DOMContentLoaded', addDefaultCards);
 formElementEditProfile.addEventListener('submit', writeDataProfile);
 
 /** Нажатие на кнопку формы добавления новой карточки. */
-formElementAddNewPlace.addEventListener('submit', handleSubmitAddNewPlaceClick);
+formElementAddNewPlace.addEventListener('submit', handleSubmitAddNewPlace);
 
 /** Добавление обработчиков событий при закрытии popup. */
 const addEventClosePopup = () => {
