@@ -70,15 +70,15 @@ const disableSubmitButton = (form) => {
 
 /** Открытие popup редактирования профиля. */
 buttonEditProfile.addEventListener('click', () => {
-  openPopup(popupEditProfile);
   fillProfileFields();
   disableSubmitButton(formElementEditProfile);
+  openPopup(popupEditProfile);
 });
 
 /** Открытие popup добавления карточки. */
 buttonAddNewPlace.addEventListener('click', () => {
-  openPopup(popupAddNewPlace);
   disableSubmitButton(formElementAddNewPlace);
+  openPopup(popupAddNewPlace);
 });
 
 /** Создаёт объект с данными для карточки. */
