@@ -1,4 +1,7 @@
-import { openPopup, createPopupViewImage } from './utils.js'
+import {
+  openPopup, popupViewImage,
+  popupImage, popupImageTitle
+} from './utils.js'
 
 class Card {
   constructor(data, cardSelector) {
@@ -55,9 +58,13 @@ class Card {
   }
 
   _handleImageClick = () => {
-    openPopup(createPopupViewImage(this._name, this._link));
+    popupImageTitle.textContent = this._name;
+    popupImage.src = this._link;
+    openPopup(popupViewImage);
   }
 
 }
 
-export { Card };
+export {
+  Card
+};

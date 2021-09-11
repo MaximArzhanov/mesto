@@ -1,4 +1,7 @@
-import { popupViewImage, popupImage, popupImageTitle } from './index.js'
+/* Элементы popup_type_image. */
+const popupViewImage = document.querySelector('.popup_type_image');
+const popupImage = popupViewImage.querySelector('.popup__image');
+const popupImageTitle = popupViewImage.querySelector('.popup__image-title');
 
 /** Закрытие popup нажатием Esc. */
 const handleCloseByEscape = (evt) => {
@@ -6,12 +9,6 @@ const handleCloseByEscape = (evt) => {
     const openedPopup = document.querySelector('.popup_opened');
     closePopup(openedPopup);
   }
-}
-
-const createPopupViewImage = (nameImage, linkImage) => {
-  popupImageTitle.textContent = nameImage;
-  popupImage.src = linkImage;
-  return popupViewImage;
 }
 
 /** Открывает popup. */
@@ -26,4 +23,10 @@ const closePopup = (popup) => {
   document.removeEventListener('keydown', handleCloseByEscape);
 }
 
-export { openPopup, closePopup, createPopupViewImage }
+export {
+  openPopup,
+  closePopup,
+  popupViewImage,
+  popupImage,
+  popupImageTitle
+}

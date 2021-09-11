@@ -28,7 +28,6 @@ class FormValidator {
     errorElement.textContent = '';
   }
 
-
   /** Проверяет каждое поле ввода.
    *  Показывает результат проверки.
    */

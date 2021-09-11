@@ -3,7 +3,6 @@ import { Card } from './Card.js'
 import { FormValidator } from './FormValidator.js'
 import { openPopup, closePopup } from './utils.js'
 
-
 /* Элементы profile. */
 const profileName = document.querySelector('.profile__name');
 const profileDescription = document.querySelector('.profile__description');
@@ -22,14 +21,8 @@ const popupInputNamePicture = popupAddNewPlace.querySelector('.popup__input_type
 const popupInputLinkPicture = popupAddNewPlace.querySelector('.popup__input_type_link');
 const formElementAddNewPlace = popupAddNewPlace.querySelector('.popup__form');
 
-/* Элементы popup_type_image. */
-const popupViewImage = document.querySelector('.popup_type_image');
-const popupImage = popupViewImage.querySelector('.popup__image');
-const popupImageTitle = popupViewImage.querySelector('.popup__image-title');
-
 /* Элементы cards. */
 const cards = document.querySelector('.cards');
-
 
 /** Записывает имя и описание в поля формы окна popup_type_edit-profile. */
 const fillProfileFields = () => {
@@ -130,5 +123,3 @@ formList.forEach((form) => {
   const formValid = new FormValidator(validateConfig, form);
   formValid.enableValidation();
 });
-
-export { popupViewImage, popupImage, popupImageTitle }
