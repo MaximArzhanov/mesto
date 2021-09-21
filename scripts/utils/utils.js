@@ -23,10 +23,22 @@ const closePopup = (popup) => {
   document.removeEventListener('keydown', handleCloseByEscape);
 }
 
+/** Создаёт объект с данными для карточки. */
+const createCardData = (name, link) => {
+  const data = [
+    {
+      name: name,
+      link: link
+    }
+  ]
+  return data;
+}
+
 export {
   openPopup,
   closePopup,
+  createCardData,
   popupViewImage,
   popupImage,
-  popupImageTitle
+  popupImageTitle,
 }

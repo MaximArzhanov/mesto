@@ -1,7 +1,8 @@
-import { initialCards, validateConfig } from './data.js'
-import { Card } from './Card.js'
-import { FormValidator } from './FormValidator.js'
-import { openPopup, closePopup } from './utils.js'
+import { initialCards, validateConfig } from '../utils/constants.js';
+import { Card } from '../components/Card.js';
+import { FormValidator } from '../components/FormValidator.js';
+import { openPopup, closePopup, createCardData } from '../utils/utils.js';
+import Section from '../components/Section.js';
 
 /* Элементы profile. */
 const profileName = document.querySelector('.profile__name');
@@ -20,9 +21,6 @@ const popupAddNewPlace = document.querySelector('.popup_type_add-new-place');
 const popupInputNamePicture = popupAddNewPlace.querySelector('.popup__input_type_name');
 const popupInputLinkPicture = popupAddNewPlace.querySelector('.popup__input_type_link');
 const formElementAddNewPlace = popupAddNewPlace.querySelector('.popup__form');
-
-/* Элементы cards. */
-const cards = document.querySelector('.cards');
 
 /** Записывает имя и описание в поля формы окна popup_type_edit-profile. */
 const fillProfileFields = () => {
@@ -57,43 +55,32 @@ buttonAddNewPlace.addEventListener('click', () => {
   openPopup(popupAddNewPlace);
 });
 
-/** Создаёт объект с данными для карточки. */
-const createCardData = (name, link) => {
-  const data = {
-    name: name,
-    link: link
-  }
-  return data;
+const addCards = (items) => {
+  const cardList = new Section({
+      data: items,
+      renderer: (item) => {
+        const card = new Card(item, '.card-template');
+        const cardElement = card.generateCard();
+        cardList.addItem(cardElement);
+      }
+    },
+    '.cards'
+  );
+
+  cardList.renderItems();
 }
 
 /** Обрабатывает событие при нажатии на кнопку создания новой карточки. */
 const handleSubmitAddNewPlace = () => {
-  addCard(createCardData(popupInputNamePicture.value, popupInputLinkPicture.value));
+  addCards(createCardData(popupInputNamePicture.value, popupInputLinkPicture.value));
   formElementAddNewPlace.reset();
   closePopup(popupAddNewPlace);
 }
 
-/** Добавляет карточки при загрузке страницы. */
-const addDefaultCards = () => {
-  initialCards.forEach((data) => {
-    addCard(data);
-  });
-}
-
-/** Добавляет карточку на страницу. */
-const addCard = (data) => {
-  cards.prepend(createCard(data));
-}
-
-/** Создаёт карточку. */
-const createCard = (data) => {
-  const card = new Card(data, '.card-template_type_default');
-  const cardElement = card.generateCard();
-  return cardElement;
-}
-
 /** Событие при загрузке страницы. */
-document.addEventListener('DOMContentLoaded', addDefaultCards);
+document.addEventListener('DOMContentLoaded', () => {
+  addCards(initialCards);
+});
 
 /** Нажатие на кнопку формы редактирования профиля. */
 formElementEditProfile.addEventListener('submit', writeDataProfile);
@@ -123,3 +110,6 @@ formList.forEach((form) => {
   const formValid = new FormValidator(validateConfig, form);
   formValid.enableValidation();
 });
+
+
+

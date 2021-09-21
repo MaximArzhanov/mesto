@@ -1,7 +1,7 @@
 import {
   openPopup, popupViewImage,
   popupImage, popupImageTitle
-} from './utils.js'
+} from '../utils/utils.js'
 
 class Card {
   constructor(data, cardSelector) {
@@ -20,10 +20,7 @@ class Card {
     return cardElement;
   }
 
-  /** Создаёт карточку.
-   *
-   * @returns Созданный элемент карточки.
-   */
+  /** Создаёт карточку. */
   generateCard = () => {
     this._element = this._getTemplate();
     this._setEventListeners();
