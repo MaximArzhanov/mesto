@@ -3,11 +3,13 @@ import {
   popupImage, popupImageTitle
 } from '../utils/utils.js'
 
+
 export default class Card {
-  constructor(data, cardSelector) {
+  constructor(data, cardSelector, { handleCardClick }) {
     this._name = data.name;
     this._link = data.link;
     this._cardSelector = cardSelector;
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate = () => {
@@ -41,7 +43,7 @@ export default class Card {
     });
 
     this._element.querySelector('.card__image').addEventListener('click', () => {
-      this._handleImageClick();
+      this._handleCardClick(this._name, this._link);
     });
   }
 
@@ -52,12 +54,6 @@ export default class Card {
 
   _handleTrashClick = () => {
     this._element.remove();
-  }
-
-  _handleImageClick = () => {
-    popupImageTitle.textContent = this._name;
-    popupImage.src = this._link;
-    openPopup(popupViewImage);
   }
 
 }

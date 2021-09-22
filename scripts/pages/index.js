@@ -4,6 +4,7 @@ import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
 import Popup from '../components/Popup.js';
+import PopupWithImage from '../components/PopupWithImage.js';
 
 /* Элементы profile. */
 const profileName = document.querySelector('.profile__name');
@@ -23,13 +24,25 @@ const popupInputNamePicture = popupAddNewPlace.querySelector('.popup__input_type
 const popupInputLinkPicture = popupAddNewPlace.querySelector('.popup__input_type_link');
 const formElementAddNewPlace = popupAddNewPlace.querySelector('.popup__form');
 
+const cardImage = document.querySelector('.card__image');
+
 /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
 
 const addCards = (items) => {
   const cardList = new Section({
       data: items,
       renderer: (item) => {
-        const card = new Card(item, '.card-template');
+        const card = new Card(
+          item,
+          '.card-template',
+          {
+            handleCardClick: (nameImage, srcImage) => {
+              const popupWithImage = new PopupWithImage('.popup_type_image', nameImage, srcImage);
+              popupWithImage.setEventListeners();
+              popupWithImage.open();
+            }
+          }
+        );
         const cardElement = card.generateCard();
         cardList.addItem(cardElement);
       }
@@ -103,11 +116,15 @@ buttonAddNewPlace.addEventListener('click', () => {
   openPopup(popupAddNewPlace);*/
 });
 
+
+
+
 /** Нажатие на кнопку формы редактирования профиля. */
 formElementEditProfile.addEventListener('submit', writeDataProfile);
 
 /** Нажатие на кнопку формы добавления новой карточки. */
 formElementAddNewPlace.addEventListener('submit', handleSubmitAddNewPlace);
+
 
 
 
