@@ -1,7 +1,7 @@
-import {
-  openPopup, popupViewImage,
-  popupImage, popupImageTitle
-} from '../utils/utils.js'
+//import {
+  //openPopup, popupViewImage,
+  //popupImage, popupImageTitle
+//} from '../utils/utils.js'
 
 
 export default class Card {

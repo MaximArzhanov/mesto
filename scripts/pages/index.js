@@ -1,10 +1,11 @@
 import { initialCards, validateConfig } from '../utils/constants.js';
-import { openPopup, closePopup, createCardData } from '../utils/utils.js';
+//import { openPopup, closePopup, createCardData } from '../utils/utils.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
 import Popup from '../components/Popup.js';
 import PopupWithImage from '../components/PopupWithImage.js';
+import PopupWithForm from '../components/PopupWithForm.js';
 
 /* Элементы profile. */
 const profileName = document.querySelector('.profile__name');
@@ -16,15 +17,12 @@ const buttonAddNewPlace = document.querySelector('.profile__add-button');
 const popupEditProfile = document.querySelector('.popup_type_edit-profile');
 const popupInputNameProfile = popupEditProfile.querySelector('.popup__input_type_name');
 const popupInputDescription = popupEditProfile.querySelector('.popup__input_type_description');
-const formElementEditProfile = popupEditProfile.querySelector('.popup__form');
 
 /* Элементы popup_type_add-new-place. */
 const popupAddNewPlace = document.querySelector('.popup_type_add-new-place');
-const popupInputNamePicture = popupAddNewPlace.querySelector('.popup__input_type_name');
-const popupInputLinkPicture = popupAddNewPlace.querySelector('.popup__input_type_link');
 const formElementAddNewPlace = popupAddNewPlace.querySelector('.popup__form');
 
-const cardImage = document.querySelector('.card__image');
+
 
 /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
 
@@ -53,13 +51,6 @@ const addCards = (items) => {
   cardList.renderItems();
 }
 
-/** Обрабатывает событие при нажатии на кнопку создания новой карточки. */
-const handleSubmitAddNewPlace = () => {
-  addCards(createCardData(popupInputNamePicture.value, popupInputLinkPicture.value));
-  formElementAddNewPlace.reset();
-  closePopup(popupAddNewPlace);
-}
-
 /** Событие при загрузке страницы. */
 document.addEventListener('DOMContentLoaded', () => {
   addCards(initialCards);
@@ -75,18 +66,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 /** Записывает имя и описание в поля формы окна popup_type_edit-profile. */
-const fillProfileFields = () => {
-  popupInputNameProfile.value = profileName.textContent;
-  popupInputDescription.value = profileDescription.textContent;
-}
+//const fillProfileFields = () => {
+  //popupInputNameProfile.value = profileName.textContent;
+  //popupInputDescription.value = profileDescription.textContent;
+//}
 
 /** Сохраняет имя и описание в профиле.
  */
-const writeDataProfile = (evt) => {
-  profileName.textContent = popupInputNameProfile.value;
-  profileDescription.textContent = popupInputDescription.value;
-  closePopup(evt.target.closest('.popup'));
-}
+//const writeDataProfile = (inputValues, inputes) => {
+  //for (let i = 0; i < inputValues.length, i++) {
+    //inputValues[i].value = inputes[i];
+  //}
+//}
+
+
+
+  //closePopup(evt.target.closest('.popup'));
+//}
 
 /** Деактивирует кнопку на форме. */
 const disableSubmitButton = (form) => {
@@ -95,56 +91,45 @@ const disableSubmitButton = (form) => {
 }
 
 /** Открытие popup редактирования профиля. */
-buttonEditProfile.addEventListener('click', () => {
-  const popup = new Popup('.popup_type_edit-profile');
-  popup.setEventListeners();
-  popup.open();
+//buttonEditProfile.addEventListener('click', () => {
+  //const popupWithForm = new PopupWithForm('.popup_type_edit-profile', writeDataProfile);
+  //popup.setEventListeners();
+  //popup.open();
 
 
   /*fillProfileFields();
   disableSubmitButton(formElementEditProfile);
   openPopup(popupEditProfile);*/
-});
+//});
+
+
 
 /** Открытие popup добавления карточки. */
 buttonAddNewPlace.addEventListener('click', () => {
-  const popup = new Popup('.popup_type_add-new-place');
-  popup.setEventListeners();
-  popup.open();
+  const popupWithForm = new PopupWithForm(
+    '.popup_type_add-new-place',
+    addCards
+  );
+  popupWithForm.setEventListeners();
+  disableSubmitButton(formElementAddNewPlace);
+  popupWithForm.open();
+ });
 
-  /*disableSubmitButton(formElementAddNewPlace);
-  openPopup(popupAddNewPlace);*/
-});
 
+
+//formElementEditProfile.addEventListener('submit', {});
 
 
 
 /** Нажатие на кнопку формы редактирования профиля. */
-formElementEditProfile.addEventListener('submit', writeDataProfile);
-
-/** Нажатие на кнопку формы добавления новой карточки. */
-formElementAddNewPlace.addEventListener('submit', handleSubmitAddNewPlace);
+//formElementEditProfile.addEventListener('submit', writeDataProfile);
 
 
 
 
-/** Добавление обработчиков событий при закрытии popup. */
-/*const addEventClosePopup = () => {
-  const popups = document.querySelectorAll('.popup');
-  popups.forEach((popup) => {
-    popup.addEventListener('click', (evt) => {
-        if (evt.target.classList.contains('popup_opened')) {
-          closePopup(popup);
-        }
-        if (evt.target.classList.contains('popup__icon-close')) {
-          closePopup(popup);
-        }
-    });
-  });
-}
-*/
 
-/*addEventClosePopup();*/
+
+
 
 const formList = Array.from(document.querySelectorAll(validateConfig.formSelector));
 formList.forEach((form) => {
