@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./pages/index.css">
   <title>Проект "Место"</title>
 </head>
 <body class="root">
@@ -15,7 +14,7 @@
     <main class="content page__content">
       <section class="profile">
         <img class="profile__avatar"
-             src="./images/Jacques-Yves-Cousteau.png"
+             src="<%=require('./images/Jacques-Yves-Cousteau.png')%>"
              alt="Аватарка пользователя.">
         <div class="profile__info">
           <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -97,12 +96,6 @@
       <button class="card__trash" type="button"></button>
     </li>
   </template>
-
-  <script type="module" src="./scripts/utils/constants.js"></script>
-  <script type="module" src="./scripts/utils/utils.js"></script>
-  <script type="module" src="./scripts/components/Card.js"></script>
-  <script type="module" src="./scripts/components/FormValidator.js"></script>
-  <script type="module" src="./scripts/pages/index.js"></script>
 
 </body>
 </html>

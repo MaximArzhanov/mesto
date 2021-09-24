@@ -1,3 +1,5 @@
+import '../../pages/index.css';
+
 import { initialCards, validateConfig } from '../utils/constants.js';
 import { createObjectSelector } from '../utils/utils.js';
 import Card from '../components/Card.js';
