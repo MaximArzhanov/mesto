@@ -34,8 +34,8 @@ const addCards = (items) => {
           '.card-template',
           {
             handleCardClick: (nameImage, srcImage) => {
-              const popupWithImage = new PopupWithImage('.popup_type_image', nameImage, srcImage);
-              popupWithImage.open();
+              const popupWithImage = new PopupWithImage('.popup_type_image');
+              popupWithImage.open(nameImage, srcImage);
             }
           }
         );
@@ -66,11 +66,11 @@ buttonEditProfile.addEventListener('click', () => {
   const userInfo = new UserInfo(createObjectSelector());
   const popupWithForm = new PopupWithForm(
     '.popup_type_edit-profile',
-    (data) => {
-      data.forEach(item => {
+    //(data) => {
+      //data.forEach(item => {
         userInfo.setUserInfo(item.name, item.link)
-      });
-    }
+      //});
+    //}
   );
   disableSubmitButton(formElementEditProfile);
   fillProfileFields(userInfo.getUserInfo());
