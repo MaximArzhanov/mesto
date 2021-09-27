@@ -35,7 +35,6 @@ const addCards = (items) => {
           {
             handleCardClick: (nameImage, srcImage) => {
               const popupWithImage = new PopupWithImage('.popup_type_image', nameImage, srcImage);
-              popupWithImage.setEventListeners();
               popupWithImage.open();
             }
           }
@@ -73,7 +72,6 @@ buttonEditProfile.addEventListener('click', () => {
       });
     }
   );
-  popupWithForm.setEventListeners();
   disableSubmitButton(formElementEditProfile);
   fillProfileFields(userInfo.getUserInfo());
   popupWithForm.open();
@@ -85,7 +83,6 @@ buttonAddNewPlace.addEventListener('click', () => {
     '.popup_type_add-new-place',
     addCards
   );
-  popupWithForm.setEventListeners();
   disableSubmitButton(formElementAddNewPlace);
   popupWithForm.open();
  });
