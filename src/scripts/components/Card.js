@@ -20,6 +20,7 @@ export default class Card {
   /** Создаёт карточку. */
   generateCard = () => {
     this._element = this._getTemplate();
+    this._likeButton = this._element.querySelector('.card__icon-like');
     this._setEventListeners();
 
     this._element.querySelector('.card__image').src = this._link;
@@ -30,7 +31,7 @@ export default class Card {
   }
 
   _setEventListeners = () => {
-    this._element.querySelector('.card__icon-like').addEventListener('click', () => {
+    this._likeButton.addEventListener('click', () => {
       this._handleLikeClick();
     });
 
@@ -44,8 +45,7 @@ export default class Card {
   }
 
   _handleLikeClick = () => {
-    this._element.querySelector('.card__icon-like')
-    .classList.toggle('card__icon-like_active');
+    this._likeButton.classList.toggle('card__icon-like_active');
   }
 
   _handleTrashClick = () => {
