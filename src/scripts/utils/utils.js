@@ -1,8 +1,8 @@
 /** Создаёт объект с данными для карточки. */
-const createObjectSelector = (name, description) => {
+const createObjectSelector = () => {
   const data = {
-    nameSelector: '.profile__name',
-    descriptionSelector: '.profile__description'
+    nameSelectorProfile: '.profile__name',
+    descriptionSelectorProfile: '.profile__description'
   }
   return data;
 }
