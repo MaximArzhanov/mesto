@@ -1,6 +1,6 @@
 import ural from '../../images/ural.jpg';
 import karelia from '../../images/karelia.jpg';
-import karachaevoCherkessia from '../../images/karachaevo-cherkessia.jpg';
+import kavkaz from '../../images/kavkaz.jpg';
 import kamchatka from '../../images/kamchatka.jpg';
 import altai from '../../images/altai.jpg';
 import baikal from '../../images/baikal.jpg';
@@ -9,27 +9,27 @@ import baikal from '../../images/baikal.jpg';
 /* Массив карточек (по-умолчанию). */
 const initialCards = [
   {
-    name: 'Урал',
+    namePicture: 'Урал',
     link: ural
   },
   {
-    name: 'Карелия',
+    namePicture: 'Карелия',
     link: karelia
   },
   {
-    name: 'Карачаево-Черкессия',
-    link: karachaevoCherkessia
+    namePicture: 'Кавказ',
+    link: kavkaz
   },
   {
-    name: 'Камчатка',
+    namePicture: 'Камчатка',
     link: kamchatka
   },
   {
-    name: 'Алтай',
+    namePicture: 'Алтай',
     link: altai
   },
   {
-    name: 'Байкал',
+    namePicture: 'Байкал',
     link: baikal
   }
 ];
@@ -44,4 +44,25 @@ const validateConfig = {
   errorClass: 'popup__input-error_active'
 };
 
-export { initialCards, validateConfig };
+/* Элементы profile. */
+const buttonEditProfile = document.querySelector('.profile__edit-button');
+const buttonAddNewPlace = document.querySelector('.profile__add-button');
+
+/* Элементы popup_type_edit-profile. */
+const popupTypeEditProfile = document.querySelector('.popup_type_edit-profile');
+const popupInputNameProfile = popupTypeEditProfile.querySelector('.popup__input_type_name');
+const popupInputDescription = popupTypeEditProfile.querySelector('.popup__input_type_description');
+
+/* Элементы popup_type_add-new-place. */
+const popupTypeAddNewPlace = document.querySelector('.popup_type_add-new-place');
+
+export {
+  initialCards,
+  validateConfig,
+  buttonEditProfile,
+  buttonAddNewPlace,
+  popupInputNameProfile,
+  popupInputDescription,
+  popupTypeEditProfile,
+  popupTypeAddNewPlace
+};
