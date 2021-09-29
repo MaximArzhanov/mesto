@@ -22,10 +22,14 @@ const formEditProfileValid = new FormValidator(
   popupTypeEditProfile.querySelector(validateConfig.formSelector)
 );
 
+formEditProfileValid.enableValidation();
+
 const formAddNewPlaceValid = new FormValidator(
   validateConfig,
   popupTypeAddNewPlace.querySelector(validateConfig.formSelector)
 );
+
+formAddNewPlaceValid.enableValidation();
 
 /** Записывает имя и описание в поля формы окна popup_type_edit-profile. */
 const fillProfileFields = (data) => {
@@ -85,14 +89,12 @@ const popupAddNewCard = new PopupWithForm(
 const popupWithImage = new PopupWithImage('.popup_type_image');
 
 buttonEditProfile.addEventListener('click', () => {
-  formEditProfileValid.enableValidation();
   formEditProfileValid.resetValidation();
   fillProfileFields(userInfo.getUserInfo());
   popupEditProfile.open();
 });
 
 buttonAddNewPlace.addEventListener('click', () => {
-  formAddNewPlaceValid.enableValidation();
   formAddNewPlaceValid.resetValidation();
   popupAddNewCard.open();
 });
