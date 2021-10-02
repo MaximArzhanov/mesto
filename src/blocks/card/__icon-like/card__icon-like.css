@@ -1,11 +1,12 @@
 .card__icon-like {
+  margin: 0;
+  padding: 0;
   background: url(../../../images/like.svg);
   background-size: cover;
   width: 22px;
   height: 19px;
   border: none;
   outline: none;
-  margin-right: 20px;
   transition: opacity .2s linear;
   cursor: pointer;
 }
