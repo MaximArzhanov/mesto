@@ -45,8 +45,12 @@ const validateConfig = {
 };
 
 /* Элементы profile. */
+const buttonEditAvatar = document.querySelector('.profile__edit-avatar');
 const buttonEditProfile = document.querySelector('.profile__edit-button');
 const buttonAddNewPlace = document.querySelector('.profile__add-button');
+
+/* Элементы popup_type_update-avatar. */
+const popupTypeUpdateAvatar = document.querySelector('.popup_type_update-avatar');
 
 /* Элементы popup_type_edit-profile. */
 const popupTypeEditProfile = document.querySelector('.popup_type_edit-profile');
@@ -59,10 +63,12 @@ const popupTypeAddNewPlace = document.querySelector('.popup_type_add-new-place')
 export {
   initialCards,
   validateConfig,
+  buttonEditAvatar,
   buttonEditProfile,
   buttonAddNewPlace,
   popupInputNameProfile,
   popupInputDescription,
+  popupTypeUpdateAvatar,
   popupTypeEditProfile,
   popupTypeAddNewPlace
 };

@@ -9,24 +9,6 @@
   grid-template-columns: repeat(1, 1fr);
 }
 
-.profile__avatar-container::before {
-  content: "";
-  background: url(../../../images/edit-avatar.svg);
-  background-repeat: no-repeat;
-  background-size: 100%;
-  width: 26px;
-  height: 26px;
-  grid-column: 1/2;
-  grid-row: 1/2;
-  align-self: center;
-  justify-self: center;
-  order: 0;
-}
-
-.profile__avatar-container:hover::before {
-  order: 1;
-}
-
 .profile__avatar-container::after {
   content: "";
   grid-column: 1/2;

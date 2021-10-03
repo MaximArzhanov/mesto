@@ -3,10 +3,12 @@ import './index.css';
 import {
   initialCards,
   validateConfig,
+  buttonEditAvatar,
   buttonEditProfile,
   buttonAddNewPlace,
   popupInputNameProfile,
   popupInputDescription,
+  popupTypeUpdateAvatar,
   popupTypeEditProfile,
   popupTypeAddNewPlace
 } from '../scripts/utils/constants.js';
@@ -17,6 +19,13 @@ import PopupWithImage from '../scripts/components/PopupWithImage.js';
 import PopupWithForm from '../scripts/components/PopupWithForm.js';
 import PopupWithConfirmation from '../scripts/components/PopupWithConfirmation.js';
 import UserInfo from '../scripts/components/UserInfo.js';
+
+const formUpdateAvatarValid = new FormValidator(
+  validateConfig,
+  popupTypeUpdateAvatar.querySelector(validateConfig.formSelector)
+);
+
+formUpdateAvatarValid.enableValidation();
 
 const formEditProfileValid = new FormValidator(
   validateConfig,
@@ -80,6 +89,15 @@ const userInfo = new UserInfo(
   }
 );
 
+const popupUpdateAvatar = new PopupWithForm(
+  '.popup_type_update-avatar',
+  {
+    handlerSubmitForm: (formValues) => {
+      // Здесь код для обновления аватарки
+    }
+  }
+);
+
 const popupEditProfile = new PopupWithForm(
   '.popup_type_edit-profile',
   {
@@ -100,6 +118,11 @@ const popupAddNewCard = new PopupWithForm(
 );
 
 const popupWithImage = new PopupWithImage('.popup_type_image');
+
+buttonEditAvatar.addEventListener('click', () => {
+  formUpdateAvatarValid.resetValidation();
+  popupUpdateAvatar.open();
+});
 
 buttonEditProfile.addEventListener('click', () => {
   formEditProfileValid.resetValidation();
