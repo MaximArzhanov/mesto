@@ -15,6 +15,7 @@ import FormValidator from '../scripts/components/FormValidator.js';
 import Section from '../scripts/components/Section.js';
 import PopupWithImage from '../scripts/components/PopupWithImage.js';
 import PopupWithForm from '../scripts/components/PopupWithForm.js';
+import PopupWithConfirmation from '../scripts/components/PopupWithConfirmation.js';
 import UserInfo from '../scripts/components/UserInfo.js';
 
 const formEditProfileValid = new FormValidator(
@@ -37,13 +38,25 @@ const fillProfileFields = (data) => {
   popupInputDescription.value = data.description;
 }
 
+const popupWithConfirmation = new PopupWithConfirmation(
+  '.popup_type_confirmation',
+  {
+    handlerClickButton: () => {
+      // Здесь код для удаления карточки
+    }
+  }
+);
+
 const createCard = (item) => {
   const card = new Card(
     item,
     '.card-template',
     {
-      handleCardClick: (nameImage, srcImage) => {
+      handlerCardClick: (nameImage, srcImage) => {
         popupWithImage.open(nameImage, srcImage);
+      },
+      handlerTrashClick: () => {
+        popupWithConfirmation.open();
       }
     }
   );
