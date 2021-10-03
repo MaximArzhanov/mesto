@@ -21,7 +21,6 @@
   align-self: center;
   justify-self: center;
   order: 0;
-  transition: all .2s linear;
 }
 
 .profile__avatar-container:hover::before {
