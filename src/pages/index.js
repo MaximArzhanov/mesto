@@ -94,7 +94,7 @@ const createCard = (item) => {
 
 const cardList = new Section({
   requestData: () => {
-    api.requestCards()
+    api.getCards()
       .then((data) => {
         data.forEach(item => {
           const cardElement = createCard(item);
@@ -127,7 +127,11 @@ const popupEditProfile = new PopupWithForm(
   '.popup_type_edit-profile',
   {
     handlerSubmitForm: (formValues) => {
-      userInfo.setUserInfo(formValues.nameUser, formValues.description);
+
+      api.updateUserInformation(formValues.name, formValues.description)
+        .then((data) => {
+          userInfo.setUserInfo(data.name, data.about);
+        });
     }
   }
 );
@@ -176,7 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
   cardList.renderItems();
 
 
-  api.requestUserInformation()
+  api.getUserInformation()
   .then((data) => {
     userInfo.setUserAvatar(data.avatar);
     userInfo.setUserInfo(data.name, data.about);
