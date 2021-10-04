@@ -118,7 +118,10 @@ const popupUpdateAvatar = new PopupWithForm(
   '.popup_type_update-avatar',
   {
     handlerSubmitForm: (formValues) => {
-      // Здесь код для обновления аватарки
+      api.updateUserAvatar(formValues.link)
+        .then((data) => {
+          userInfo.setUserAvatar(data.avatar);
+        });
     }
   }
 );
@@ -127,7 +130,6 @@ const popupEditProfile = new PopupWithForm(
   '.popup_type_edit-profile',
   {
     handlerSubmitForm: (formValues) => {
-
       api.updateUserInformation(formValues.name, formValues.description)
         .then((data) => {
           userInfo.setUserInfo(data.name, data.about);
