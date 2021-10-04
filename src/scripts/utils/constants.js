@@ -9,27 +9,27 @@ import baikal from '../../images/baikal.jpg';
 /* Массив карточек (по-умолчанию). */
 const initialCards = [
   {
-    namePicture: 'Урал',
+    name: 'Урал',
     link: ural
   },
   {
-    namePicture: 'Карелия',
+    name: 'Карелия',
     link: karelia
   },
   {
-    namePicture: 'Кавказ',
+    name: 'Кавказ',
     link: kavkaz
   },
   {
-    namePicture: 'Камчатка',
+    name: 'Камчатка',
     link: kamchatka
   },
   {
-    namePicture: 'Алтай',
+    name: 'Алтай',
     link: altai
   },
   {
-    namePicture: 'Байкал',
+    name: 'Байкал',
     link: baikal
   }
 ];

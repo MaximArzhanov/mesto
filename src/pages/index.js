@@ -1,7 +1,7 @@
 import './index.css';
 
 import {
-  initialCards,
+  //initialCards,
   validateConfig,
   buttonEditAvatar,
   buttonEditProfile,
@@ -19,6 +19,7 @@ import PopupWithImage from '../scripts/components/PopupWithImage.js';
 import PopupWithForm from '../scripts/components/PopupWithForm.js';
 import PopupWithConfirmation from '../scripts/components/PopupWithConfirmation.js';
 import UserInfo from '../scripts/components/UserInfo.js';
+import Api from '../scripts/components/Api.js';
 
 const formUpdateAvatarValid = new FormValidator(
   validateConfig,
@@ -40,6 +41,20 @@ const formAddNewPlaceValid = new FormValidator(
 );
 
 formAddNewPlaceValid.enableValidation();
+
+
+
+const api = new Api();
+
+
+
+
+
+
+
+
+
+
 
 /** Записывает имя и описание в поля формы окна popup_type_edit-profile. */
 const fillProfileFields = (data) => {
@@ -72,12 +87,21 @@ const createCard = (item) => {
   return card.generateCard();
 }
 
+
+
+
+
+
 const cardList = new Section({
-    data: initialCards,
-    renderer: (item) => {
-      const cardElement = createCard(item);
-      cardList.addItem(cardElement);
-    }
+  requestData: () => {
+    api.requestCards()
+      .then((data) => {
+        data.forEach(item => {
+          const cardElement = createCard(item);
+          cardList.addItem(cardElement);
+        });
+      });
+    },
   },
   '.cards'
 );
@@ -85,7 +109,8 @@ const cardList = new Section({
 const userInfo = new UserInfo(
   {
     nameSelectorProfile: '.profile__name',
-    descriptionSelectorProfile: '.profile__description'
+    descriptionSelectorProfile: '.profile__description',
+    avatarSelectorProfile: '.profile__avatar'
   }
 );
 
@@ -135,7 +160,29 @@ buttonAddNewPlace.addEventListener('click', () => {
   popupAddNewCard.open();
 });
 
+
+
+
+
+
+
+
+
+
+
+
 /** Событие при загрузке страницы. */
 document.addEventListener('DOMContentLoaded', () => {
   cardList.renderItems();
+
+
+  api.requestUserInformation()
+  .then((data) => {
+    userInfo.setUserAvatar(data.avatar);
+    userInfo.setUserInfo(data.name, data.about);
+  });
+
+
+
+
 });
