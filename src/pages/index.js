@@ -142,8 +142,11 @@ const popupAddNewCard = new PopupWithForm(
   '.popup_type_add-new-place',
   {
     handlerSubmitForm: (formValues) => {
-      const cardElement = createCard(formValues);
-      cardList.addItem(cardElement);
+      api.addCard(formValues.name, formValues.link)
+        .then((card) => {
+          const cardElement = createCard(card);
+          cardList.addItem(cardElement);
+        });
     }
   }
 );
