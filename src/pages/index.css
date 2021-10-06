@@ -41,6 +41,7 @@
 @import url("../blocks/card/__like-counter/card__like-counter.css");
 @import url("../blocks/card/__icon-like/_active/card__icon-like_active.css");
 @import url("../blocks/card/__trash/card__trash.css");
+@import url("../blocks/card/__trash/_disable/card__trash_disable.css");
 
 /*  footer  */
 @import url("../blocks/footer/footer.css");

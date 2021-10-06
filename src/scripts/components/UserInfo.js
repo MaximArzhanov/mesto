@@ -8,14 +8,16 @@ export default class UserInfo {
   getUserInfo = () => {
     const data = {
       name: this._nameUserProfile.textContent,
-      description: this._descriptionUserProfile.textContent
+      description: this._descriptionUserProfile.textContent,
+      id: this._id
     };
     return data;
   }
 
-  setUserInfo = (name, description) => {
+  setUserInfo = (name, description, id) => {
     this._nameUserProfile.textContent = name;
     this._descriptionUserProfile.textContent = description;
+    this._id = id;
   }
 
   setUserAvatar = (link) => {

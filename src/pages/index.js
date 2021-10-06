@@ -46,7 +46,9 @@ formAddNewPlaceValid.enableValidation();
 
 const api = new Api();
 
-
+const popupWithConfirmation = new PopupWithConfirmation(
+  '.popup_type_confirmation',
+);
 
 
 
@@ -62,28 +64,29 @@ const fillProfileFields = (data) => {
   popupInputDescription.value = data.description;
 }
 
-const popupWithConfirmation = new PopupWithConfirmation(
-  '.popup_type_confirmation',
-  {
-    handlerClickButton: () => {
-      // Здесь код для удаления карточки
-    }
-  }
-);
-
 const createCard = (item) => {
   const card = new Card(
     item,
     '.card-template',
+    userInfo.getUserInfo().id,
     {
       handlerCardClick: (nameImage, srcImage) => {
         popupWithImage.open(nameImage, srcImage);
       },
       handlerTrashClick: () => {
         popupWithConfirmation.open();
+      },
+      handlerLikeClick: (card) => {
+
+        api.changeLikeCardStatus(card.cardId, !card.isLiked())
+          .then((data) => {
+            card.setLikesInfo(data);
+          })
+
       }
     }
   );
+
   return card.generateCard();
 }
 
@@ -146,6 +149,8 @@ const popupAddNewCard = new PopupWithForm(
         .then((card) => {
           const cardElement = createCard(card);
           cardList.addItem(cardElement);
+
+          console.log(card._id);
         });
     }
   }
@@ -188,7 +193,7 @@ document.addEventListener('DOMContentLoaded', () => {
   api.getUserInformation()
   .then((data) => {
     userInfo.setUserAvatar(data.avatar);
-    userInfo.setUserInfo(data.name, data.about);
+    userInfo.setUserInfo(data.name, data.about, data._id);
   });
 
 

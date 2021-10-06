@@ -116,5 +116,45 @@ export default class Api {
       });
   }
 
+  changeLikeCardStatus(cardId, isLiked) {
+    return fetch(`https://mesto.nomoreparties.co/v1/${this._cohort}/cards/likes/${cardId}`, {
+      method: isLiked ? 'PUT' : 'DELETE',
+      headers: {
+        authorization: this._token,
+        'Content-Type': 'application/json'
+      }
+    })
+    .then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Ошибка: ${res.status}`);
+    })
+    .catch((err) => {
+      console.error(err);
+
+      return {};
+    });
+  }
+
+  deleteCard(cardId) {
+    return fetch(`https://mesto.nomoreparties.co/v1/${this._cohort}/cards/${cardId}`, {
+    method: 'DELETE',
+    headers: {
+        authorization: this._token
+      }
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Ошибка: ${res.status}`);
+      })
+      .catch((err) => {
+        console.error(err);
+
+        return [];
+      });
+  }
 
 }
