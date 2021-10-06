@@ -1,7 +1,6 @@
 import './index.css';
 
 import {
-  //initialCards,
   validateConfig,
   buttonEditAvatar,
   buttonEditProfile,
@@ -42,21 +41,7 @@ const formAddNewPlaceValid = new FormValidator(
 
 formAddNewPlaceValid.enableValidation();
 
-
-
 const api = new Api();
-
-const popupWithConfirmation = new PopupWithConfirmation(
-  '.popup_type_confirmation',
-);
-
-
-
-
-
-
-
-
 
 /** Записывает имя и описание в поля формы окна popup_type_edit-profile. */
 const fillProfileFields = (data) => {
@@ -74,32 +59,33 @@ const createCard = (item) => {
         popupWithImage.open(nameImage, srcImage);
       },
       handlerTrashClick: () => {
+        popupWithConfirmation.setEventListeners(() => {
+          api.deleteCard(card.cardId)
+            .then((data) => {
+              card.deleteCard();
+              popupWithConfirmation.close();
+              console.log(data);
+            })
+        });
         popupWithConfirmation.open();
       },
       handlerLikeClick: (card) => {
-
         api.changeLikeCardStatus(card.cardId, !card.isLiked())
           .then((data) => {
             card.setLikesInfo(data);
           })
-
       }
     }
   );
-
   return card.generateCard();
 }
-
-
-
-
-
 
 const cardList = new Section({
   requestData: () => {
     api.getCards()
       .then((data) => {
-        data.forEach(item => {
+        const dataReverse = data.reverse();
+        dataReverse.forEach(item => {
           const cardElement = createCard(item);
           cardList.addItem(cardElement);
         });
@@ -115,6 +101,10 @@ const userInfo = new UserInfo(
     descriptionSelectorProfile: '.profile__description',
     avatarSelectorProfile: '.profile__avatar'
   }
+);
+
+const popupWithConfirmation = new PopupWithConfirmation(
+  '.popup_type_confirmation',
 );
 
 const popupUpdateAvatar = new PopupWithForm(

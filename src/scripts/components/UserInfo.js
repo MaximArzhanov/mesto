@@ -21,7 +21,6 @@ export default class UserInfo {
   }
 
   setUserAvatar = (link) => {
-    //this._avatarUserProfile.src = `<%=require('${link}')%>`;
     this._avatarUserProfile.src = link;
   }
 

@@ -1,39 +1,3 @@
-import ural from '../../images/ural.jpg';
-import karelia from '../../images/karelia.jpg';
-import kavkaz from '../../images/kavkaz.jpg';
-import kamchatka from '../../images/kamchatka.jpg';
-import altai from '../../images/altai.jpg';
-import baikal from '../../images/baikal.jpg';
-
-
-/* Массив карточек (по-умолчанию). */
-const initialCards = [
-  {
-    name: 'Урал',
-    link: ural
-  },
-  {
-    name: 'Карелия',
-    link: karelia
-  },
-  {
-    name: 'Кавказ',
-    link: kavkaz
-  },
-  {
-    name: 'Камчатка',
-    link: kamchatka
-  },
-  {
-    name: 'Алтай',
-    link: altai
-  },
-  {
-    name: 'Байкал',
-    link: baikal
-  }
-];
-
 /* Объект элементов формы. */
 const validateConfig = {
   formSelector: '.popup__form',
@@ -61,7 +25,6 @@ const popupInputDescription = popupTypeEditProfile.querySelector('.popup__input_
 const popupTypeAddNewPlace = document.querySelector('.popup_type_add-new-place');
 
 export {
-  initialCards,
   validateConfig,
   buttonEditAvatar,
   buttonEditProfile,

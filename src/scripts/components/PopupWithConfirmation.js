@@ -6,24 +6,20 @@ export default class PopupWithConfirmation extends Popup {
     this._popupButton = this._popup.querySelector('.popup__button');
   }
 
-  _handlerClick = () => {
-    this._handlerClickButton();
-    this.close();
-  }
-
-  open = (handlerClickButton) => {
-    this._handlerClickButton = handlerClickButton;
-    super.open();
-  }
-
-  setEventListeners = () => {
+  setEventListeners = (handlerConfirmButton) => {
+    this._handlerConfirmButton = handlerConfirmButton;
     super.setEventListeners();
-    this._popupButton.addEventListener('click', this._handlerClick);
+    this._popupButton.addEventListener('click', this._handlerConfirmButton);
+  }
+
+  open = () => {
+    this._popup.classList.add('popup_opened');
   }
 
   _removeEventListeners = () => {
     super._removeEventListeners();
-    this._popupButton.removeEventListener('click', this._handlerClick);
+    console.log(this._handlerConfirmButton);
+    this._popupButton.removeEventListener('click', this._handlerConfirmButton);
   }
 
 }
