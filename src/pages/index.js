@@ -182,29 +182,14 @@ buttonAddNewPlace.addEventListener('click', () => {
   popupAddNewCard.open();
 });
 
-
-
-
-
-
-
-
-
-
-
-
 /** Событие при загрузке страницы. */
 document.addEventListener('DOMContentLoaded', () => {
   cardList.renderItems();
-
 
   api.getUserInformation()
   .then((data) => {
     userInfo.setUserAvatar(data.avatar);
     userInfo.setUserInfo(data.name, data.about, data._id);
   });
-
-
-
 
 });
