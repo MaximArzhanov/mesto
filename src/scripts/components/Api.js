@@ -23,7 +23,8 @@ export default class Api {
       });
   }
 
-  updateUserInformation(nameUser, aboutUser) {
+  updateUserInformation(nameUser, aboutUser, renderLoading, popup) {
+    renderLoading(true, popup);
     return fetch(`https://mesto.nomoreparties.co/v1/${this._cohort}/users/me`, {
       method: 'PATCH',
       headers: {
@@ -48,7 +49,8 @@ export default class Api {
       });
   }
 
-  updateUserAvatar(link) {
+  updateUserAvatar(link, renderLoading, popup) {
+    renderLoading(true, popup);
     return fetch(`https://mesto.nomoreparties.co/v1/${this._cohort}/users/me/avatar`, {
       method: 'PATCH',
       headers: {

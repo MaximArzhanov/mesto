@@ -39,7 +39,6 @@ export default class Card {
   }
 
   _setEventListeners = () => {
-    debugger;
     this._likeButton.addEventListener('click', () => {
       this._handlerLikeClick(this);
     });

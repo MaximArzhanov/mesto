@@ -18,7 +18,6 @@ export default class PopupWithConfirmation extends Popup {
 
   _removeEventListeners = () => {
     super._removeEventListeners();
-    console.log(this._handlerConfirmButton);
     this._popupButton.removeEventListener('click', this._handlerConfirmButton);
   }
 

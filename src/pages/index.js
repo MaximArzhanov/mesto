@@ -107,13 +107,29 @@ const popupWithConfirmation = new PopupWithConfirmation(
   '.popup_type_confirmation',
 );
 
+
+
+const renderLoading = (isLoading, popup) => {
+  const button = popup.getButtonFormElement()
+  if (isLoading)
+    button.textContent = 'Сохранить...';
+  else {
+    button.textContent = 'Сохранить';
+    popup.close();
+  }
+}
+
+
 const popupUpdateAvatar = new PopupWithForm(
   '.popup_type_update-avatar',
   {
     handlerSubmitForm: (formValues) => {
-      api.updateUserAvatar(formValues.link)
+      api.updateUserAvatar(formValues.link, renderLoading, popupUpdateAvatar)
         .then((data) => {
           userInfo.setUserAvatar(data.avatar);
+        })
+        .finally(() => {
+          renderLoading(false, popupUpdateAvatar);
         });
     }
   }
@@ -123,9 +139,12 @@ const popupEditProfile = new PopupWithForm(
   '.popup_type_edit-profile',
   {
     handlerSubmitForm: (formValues) => {
-      api.updateUserInformation(formValues.name, formValues.description)
+      api.updateUserInformation(formValues.name, formValues.description, renderLoading, popupEditProfile)
         .then((data) => {
           userInfo.setUserInfo(data.name, data.about);
+        })
+        .finally(() => {
+          renderLoading(false, popupEditProfile);
         });
     }
   }
@@ -139,8 +158,7 @@ const popupAddNewCard = new PopupWithForm(
         .then((card) => {
           const cardElement = createCard(card);
           cardList.addItem(cardElement);
-
-          console.log(card._id);
+          popupAddNewCard.close();
         });
     }
   }
