@@ -28,11 +28,13 @@ export default class Card {
   generateCard = () => {
     this._element = this._getTemplate();
     this._likeButton = this._element.querySelector('.card__icon-like');
-    this._setEventListeners();
+    this._cardImage = this._element.querySelector('.card__image');
+    this._trashElement = this._element.querySelector('.card__trash');
 
-    this._element.querySelector('.card__image').src = this._link;
-    this._element.querySelector('.card__image').alt = this._name + '.';
+    this._cardImage.src = this._link;
+    this._cardImage.alt = this._name + '.';
     this._element.querySelector('.card__name').textContent = this._name;
+    this._setEventListeners();
     this.setLikesInfo(this._data);
 
     return this._element;
@@ -44,14 +46,14 @@ export default class Card {
     });
 
     if (this._id != this._ownerId) {
-      this._element.querySelector('.card__trash').classList.add('card__trash_disable');
+      this._trashElement.classList.add('card__trash_disable');
     } else {
-      this._element.querySelector('.card__trash').addEventListener('click', () => {
+      this._trashElement.addEventListener('click', () => {
           this._handlerTrashClick();
       });
     }
 
-    this._element.querySelector('.card__image').addEventListener('click', () => {
+    this._cardImage.addEventListener('click', () => {
       this._handlerCardClick(this._name, this._link);
     });
   }
