@@ -26,11 +26,6 @@ export default class Api {
       })
     })
       .then(this._checkResponse)
-      .catch((err) => {
-        console.error(err);
-
-        return {};
-      });
   }
 
   updateUserAvatar(link, renderLoading, popup) {
@@ -46,11 +41,6 @@ export default class Api {
       })
     })
       .then(this._checkResponse)
-      .catch((err) => {
-        console.error(err);
-
-        return {};
-      });
   }
 
   _getUserInformation() {
@@ -91,11 +81,6 @@ export default class Api {
       })
     })
       .then(this._checkResponse)
-      .catch((err) => {
-        console.error(err);
-
-        return {};
-      });
   }
 
   changeLikeCardStatus(cardId, isLiked) {
@@ -107,11 +92,6 @@ export default class Api {
       }
     })
     .then(this._checkResponse)
-    .catch((err) => {
-      console.error(err);
-
-      return {};
-    });
   }
 
   deleteCard(cardId) {
@@ -122,11 +102,6 @@ export default class Api {
       }
     })
       .then(this._checkResponse)
-      .catch((err) => {
-        console.error(err);
-
-        return [];
-      });
   }
 
 }
