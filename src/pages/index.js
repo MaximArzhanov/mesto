@@ -88,6 +88,18 @@ const createCard = (item) => {
   return card.generateCard();
 }
 
+/** Загружает данные пользователя */
+const initializeUserInfo = () => {
+  api.getPageInformation()
+    .then((data) => {
+      userInfo.setUserAvatar(data[0].avatar);
+      userInfo.setUserInfo(data[0].name, data[0].about, data[0]._id);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+}
+
 const cardList = new Section({
   renderer: (item) => {
     const cardElement = createCard(item);
@@ -196,15 +208,8 @@ buttonAddNewPlace.addEventListener('click', () => {
 
 /** Событие при загрузке страницы. */
 document.addEventListener('DOMContentLoaded', () => {
-
   cardList.renderDefaultItems();
-
-  api.getPageInformation()
-    .then((data) => {
-      userInfo.setUserAvatar(data[0].avatar);
-      userInfo.setUserInfo(data[0].name, data[0].about, data[0]._id);
-    })
-    .catch((err) => {
-      console.error(err);
-    });
 });
+
+/** Загрузка данных пользователя */
+initializeUserInfo();
