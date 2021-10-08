@@ -5,6 +5,13 @@ export default class Api {
     this._baseUrl = baseUrl;
   }
 
+  _checkResponse(res) {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`Ошибка: ${res.status}`);
+}
+
   updateUserInformation(nameUser, aboutUser, renderLoading, popup) {
     renderLoading(true, popup);
     return fetch(`${this._baseUrl}${this._cohort}/users/me`, {
@@ -18,12 +25,7 @@ export default class Api {
         about: aboutUser
       })
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
+      .then(this._checkResponse)
       .catch((err) => {
         console.error(err);
 
@@ -43,12 +45,7 @@ export default class Api {
         avatar: link,
       })
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
+      .then(this._checkResponse)
       .catch((err) => {
         console.error(err);
 
@@ -56,20 +53,13 @@ export default class Api {
       });
   }
 
-
-
   _getUserInformation() {
     return fetch(`${this._baseUrl}${this._cohort}/users/me`, {
       headers: {
         authorization: this._token
       }
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
+      .then(this._checkResponse)
   }
 
   _getCards() {
@@ -78,12 +68,7 @@ export default class Api {
         authorization: this._token
       }
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
+      .then(this._checkResponse)
   }
 
   getPageInformation() {
@@ -105,12 +90,7 @@ export default class Api {
         link: linkCard
       })
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
+      .then(this._checkResponse)
       .catch((err) => {
         console.error(err);
 
@@ -126,12 +106,7 @@ export default class Api {
         'Content-Type': 'application/json'
       }
     })
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    })
+    .then(this._checkResponse)
     .catch((err) => {
       console.error(err);
 
@@ -146,12 +121,7 @@ export default class Api {
         authorization: this._token
       }
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
+      .then(this._checkResponse)
       .catch((err) => {
         console.error(err);
 
