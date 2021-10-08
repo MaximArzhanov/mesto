@@ -136,7 +136,8 @@ const popupUpdateAvatar = new PopupWithForm(
   '.popup_type_update-avatar',
   {
     handlerSubmitForm: (formValues) => {
-      api.updateUserAvatar(formValues.link, renderLoading, popupUpdateAvatar)
+      renderLoading(true, popupUpdateAvatar);
+      api.updateUserAvatar(formValues.link)
         .then((data) => {
           userInfo.setUserAvatar(data.avatar);
           popupUpdateAvatar.close();
@@ -155,7 +156,8 @@ const popupEditProfile = new PopupWithForm(
   '.popup_type_edit-profile',
   {
     handlerSubmitForm: (formValues) => {
-      api.updateUserInformation(formValues.name, formValues.description, renderLoading, popupEditProfile)
+      renderLoading(true, popupEditProfile);
+      api.updateUserInformation(formValues.name, formValues.description)
         .then((data) => {
           userInfo.setUserInfo(data.name, data.about);
           popupEditProfile.close();

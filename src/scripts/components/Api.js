@@ -12,8 +12,7 @@ export default class Api {
     return Promise.reject(`Ошибка: ${res.status}`);
 }
 
-  updateUserInformation(nameUser, aboutUser, renderLoading, popup) {
-    renderLoading(true, popup);
+  updateUserInformation(nameUser, aboutUser) {
     return fetch(`${this._baseUrl}${this._cohort}/users/me`, {
       method: 'PATCH',
       headers: {
@@ -28,8 +27,7 @@ export default class Api {
       .then(this._checkResponse)
   }
 
-  updateUserAvatar(link, renderLoading, popup) {
-    renderLoading(true, popup);
+  updateUserAvatar(link) {
     return fetch(`${this._baseUrl}${this._cohort}/users/me/avatar`, {
       method: 'PATCH',
       headers: {
