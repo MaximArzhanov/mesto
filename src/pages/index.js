@@ -9,7 +9,10 @@ import {
   popupInputDescription,
   popupTypeUpdateAvatar,
   popupTypeEditProfile,
-  popupTypeAddNewPlace
+  popupTypeAddNewPlace,
+  cohort,
+  token,
+  baseUrl
 } from '../scripts/utils/constants.js';
 import Card from '../scripts/components/Card.js';
 import FormValidator from '../scripts/components/FormValidator.js';
@@ -41,7 +44,7 @@ const formAddNewPlaceValid = new FormValidator(
 
 formAddNewPlaceValid.enableValidation();
 
-const api = new Api();
+const api = new Api(cohort, token, baseUrl);
 
 /** Записывает имя и описание в поля формы окна popup_type_edit-profile. */
 const fillProfileFields = (data) => {

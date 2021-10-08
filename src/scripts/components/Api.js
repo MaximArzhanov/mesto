@@ -1,12 +1,13 @@
 export default class Api {
-  constructor() {
-    this._cohort = 'cohort-28';
-    this._token = 'b5931bc5-3874-4455-9cea-b058f66f7d9b'
+  constructor(cohort, token, baseUrl) {
+    this._cohort = cohort;
+    this._token = token;
+    this._baseUrl = baseUrl;
   }
 
   updateUserInformation(nameUser, aboutUser, renderLoading, popup) {
     renderLoading(true, popup);
-    return fetch(`https://mesto.nomoreparties.co/v1/${this._cohort}/users/me`, {
+    return fetch(`${this._baseUrl}${this._cohort}/users/me`, {
       method: 'PATCH',
       headers: {
         authorization: this._token,
@@ -32,7 +33,7 @@ export default class Api {
 
   updateUserAvatar(link, renderLoading, popup) {
     renderLoading(true, popup);
-    return fetch(`https://mesto.nomoreparties.co/v1/${this._cohort}/users/me/avatar`, {
+    return fetch(`${this._baseUrl}${this._cohort}/users/me/avatar`, {
       method: 'PATCH',
       headers: {
         authorization: this._token,
@@ -58,7 +59,7 @@ export default class Api {
 
 
   _getUserInformation() {
-    return fetch(`https://mesto.nomoreparties.co/v1/${this._cohort}/users/me`, {
+    return fetch(`${this._baseUrl}${this._cohort}/users/me`, {
       headers: {
         authorization: this._token
       }
@@ -72,7 +73,7 @@ export default class Api {
   }
 
   _getCards() {
-    return fetch(`https://mesto.nomoreparties.co/v1/${this._cohort}/cards`, {
+    return fetch(`${this._baseUrl}${this._cohort}/cards`, {
       headers: {
         authorization: this._token
       }
@@ -93,7 +94,7 @@ export default class Api {
   }
 
   addCard(nameCard, linkCard) {
-    return fetch(`https://mesto.nomoreparties.co/v1/${this._cohort}/cards`, {
+    return fetch(`${this._baseUrl}${this._cohort}/cards`, {
       method: 'POST',
       headers: {
         authorization: this._token,
@@ -118,7 +119,7 @@ export default class Api {
   }
 
   changeLikeCardStatus(cardId, isLiked) {
-    return fetch(`https://mesto.nomoreparties.co/v1/${this._cohort}/cards/likes/${cardId}`, {
+    return fetch(`${this._baseUrl}${this._cohort}/cards/likes/${cardId}`, {
       method: isLiked ? 'PUT' : 'DELETE',
       headers: {
         authorization: this._token,
@@ -139,7 +140,7 @@ export default class Api {
   }
 
   deleteCard(cardId) {
-    return fetch(`https://mesto.nomoreparties.co/v1/${this._cohort}/cards/${cardId}`, {
+    return fetch(`${this._baseUrl}${this._cohort}/cards/${cardId}`, {
     method: 'DELETE',
     headers: {
         authorization: this._token
