@@ -62,7 +62,7 @@ const createCard = (item) => {
         popupWithImage.open(nameImage, srcImage);
       },
       handlerTrashClick: () => {
-        popupWithConfirmation.setEventListeners(() => {
+        popupWithConfirmation.open(() => {
           api.deleteCard(card.cardId)
             .then((data) => {
               card.deleteCard();
@@ -73,7 +73,6 @@ const createCard = (item) => {
               console.error(err);
             });
         });
-        popupWithConfirmation.open();
       },
       handlerLikeClick: (card) => {
         api.changeLikeCardStatus(card.cardId, !card.isLiked())
