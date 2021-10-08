@@ -66,6 +66,9 @@ const createCard = (item) => {
               popupWithConfirmation.close();
               console.log(data);
             })
+            .catch((err) => {
+              console.error(err);
+            });
         });
         popupWithConfirmation.open();
       },
@@ -74,6 +77,9 @@ const createCard = (item) => {
           .then((data) => {
             card.setLikesInfo(data);
           })
+          .catch((err) => {
+            console.error(err);
+          });
       }
     }
   );
@@ -81,16 +87,20 @@ const createCard = (item) => {
 }
 
 const cardList = new Section({
+  renderer: (item) => {
+    const cardElement = createCard(item);
+    cardList.addItem(cardElement);
+  },
   requestData: () => {
-    api.getCards()
+    api.getPageInformation()
       .then((data) => {
-        const dataReverse = data.reverse();
-        dataReverse.forEach(item => {
-          const cardElement = createCard(item);
-          cardList.addItem(cardElement);
-        });
-      });
-    },
+        const dataReverse = data[1].reverse();
+        cardList.renderItems(dataReverse);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+    }
   },
   '.cards'
 );
@@ -115,7 +125,6 @@ const renderLoading = (isLoading, popup) => {
     button.textContent = 'Сохранить...';
   else {
     button.textContent = 'Сохранить';
-    popup.close();
   }
 }
 
@@ -127,6 +136,10 @@ const popupUpdateAvatar = new PopupWithForm(
       api.updateUserAvatar(formValues.link, renderLoading, popupUpdateAvatar)
         .then((data) => {
           userInfo.setUserAvatar(data.avatar);
+          popupUpdateAvatar.close();
+        })
+        .catch((err) => {
+          console.error(err);
         })
         .finally(() => {
           renderLoading(false, popupUpdateAvatar);
@@ -142,6 +155,10 @@ const popupEditProfile = new PopupWithForm(
       api.updateUserInformation(formValues.name, formValues.description, renderLoading, popupEditProfile)
         .then((data) => {
           userInfo.setUserInfo(data.name, data.about);
+          popupEditProfile.close();
+        })
+        .catch((err) => {
+          console.error(err);
         })
         .finally(() => {
           renderLoading(false, popupEditProfile);
@@ -159,6 +176,9 @@ const popupAddNewCard = new PopupWithForm(
           const cardElement = createCard(card);
           cardList.addItem(cardElement);
           popupAddNewCard.close();
+        })
+        .catch((err) => {
+          console.error(err);
         });
     }
   }
@@ -184,12 +204,15 @@ buttonAddNewPlace.addEventListener('click', () => {
 
 /** Событие при загрузке страницы. */
 document.addEventListener('DOMContentLoaded', () => {
-  cardList.renderItems();
 
-  api.getUserInformation()
-  .then((data) => {
-    userInfo.setUserAvatar(data.avatar);
-    userInfo.setUserInfo(data.name, data.about, data._id);
-  });
+  cardList.renderDefaultItems();
 
+  api.getPageInformation()
+    .then((data) => {
+      userInfo.setUserAvatar(data[0].avatar);
+      userInfo.setUserInfo(data[0].name, data[0].about, data[0]._id);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
 });
