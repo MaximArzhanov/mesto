@@ -119,23 +119,11 @@ const popupWithConfirmation = new PopupWithConfirmation(
   '.popup_type_confirmation',
 );
 
-
-
-const renderLoading = (isLoading, popup) => {
-  const button = popup.getButtonFormElement()
-  if (isLoading)
-    button.textContent = 'Сохранить...';
-  else {
-    button.textContent = 'Сохранить';
-  }
-}
-
-
 const popupUpdateAvatar = new PopupWithForm(
   '.popup_type_update-avatar',
   {
     handlerSubmitForm: (formValues) => {
-      renderLoading(true, popupUpdateAvatar);
+      popupUpdateAvatar.renderLoading(true);
       api.updateUserAvatar(formValues.link)
         .then((data) => {
           userInfo.setUserAvatar(data.avatar);
@@ -145,7 +133,7 @@ const popupUpdateAvatar = new PopupWithForm(
           console.error(err);
         })
         .finally(() => {
-          renderLoading(false, popupUpdateAvatar);
+          popupUpdateAvatar.renderLoading(false);
         });
     }
   }
@@ -155,7 +143,7 @@ const popupEditProfile = new PopupWithForm(
   '.popup_type_edit-profile',
   {
     handlerSubmitForm: (formValues) => {
-      renderLoading(true, popupEditProfile);
+      popupEditProfile.renderLoading(true);
       api.updateUserInformation(formValues.name, formValues.description)
         .then((data) => {
           userInfo.setUserInfo(data.name, data.about);
@@ -165,7 +153,7 @@ const popupEditProfile = new PopupWithForm(
           console.error(err);
         })
         .finally(() => {
-          renderLoading(false, popupEditProfile);
+          popupEditProfile.renderLoading(false);
         });
     }
   }

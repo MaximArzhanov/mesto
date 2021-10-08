@@ -9,8 +9,12 @@ export default class PopupWithForm extends Popup {
     this._buttonFormElement = this._popup.querySelector('.popup__button');
   }
 
-  getButtonFormElement = () => {
-    return this._buttonFormElement;
+  renderLoading = (isLoading) => {
+    if (isLoading)
+      this._buttonFormElement.textContent = 'Сохранить...';
+    else {
+      this._buttonFormElement.textContent = 'Сохранить';
+    }
   }
 
   _getInputValues = () => {
