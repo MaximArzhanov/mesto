@@ -12,7 +12,11 @@ import {
   popupTypeAddNewPlace,
   cohort,
   token,
-  baseUrl
+  baseUrl,
+  textSave,
+  textSaveLoading,
+  textCreate,
+  textCreateLoading
 } from '../scripts/utils/constants.js';
 import Card from '../scripts/components/Card.js';
 import FormValidator from '../scripts/components/FormValidator.js';
@@ -113,7 +117,7 @@ const popupUpdateAvatar = new PopupWithForm(
   '.popup_type_update-avatar',
   {
     handlerSubmitForm: (formValues) => {
-      popupUpdateAvatar.renderLoading(true);
+      popupUpdateAvatar.renderLoading(true, textSaveLoading);
       api.updateUserAvatar(formValues.link)
         .then((data) => {
           userInfo.setUserAvatar(data.avatar);
@@ -123,7 +127,7 @@ const popupUpdateAvatar = new PopupWithForm(
           console.error(err);
         })
         .finally(() => {
-          popupUpdateAvatar.renderLoading(false);
+          popupUpdateAvatar.renderLoading(false, textSave);
         });
     }
   }
@@ -133,7 +137,7 @@ const popupEditProfile = new PopupWithForm(
   '.popup_type_edit-profile',
   {
     handlerSubmitForm: (formValues) => {
-      popupEditProfile.renderLoading(true);
+      popupEditProfile.renderLoading(true, textSaveLoading);
       api.updateUserInformation(formValues.name, formValues.description)
         .then((data) => {
           userInfo.setUserInfo(data.name, data.about);
@@ -143,7 +147,7 @@ const popupEditProfile = new PopupWithForm(
           console.error(err);
         })
         .finally(() => {
-          popupEditProfile.renderLoading(false);
+          popupEditProfile.renderLoading(false, textSave);
         });
     }
   }
@@ -153,6 +157,7 @@ const popupAddNewCard = new PopupWithForm(
   '.popup_type_add-new-place',
   {
     handlerSubmitForm: (formValues) => {
+      popupAddNewCard.renderLoading(true, textCreateLoading);
       api.addCard(formValues.name, formValues.link)
         .then((card) => {
           const cardElement = createCard(card);
@@ -161,6 +166,9 @@ const popupAddNewCard = new PopupWithForm(
         })
         .catch((err) => {
           console.error(err);
+        })
+        .finally(() => {
+          popupAddNewCard.renderLoading(false, textCreate);
         });
     }
   }

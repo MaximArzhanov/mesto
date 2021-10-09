@@ -24,9 +24,16 @@ const popupInputDescription = popupTypeEditProfile.querySelector('.popup__input_
 /* Элементы popup_type_add-new-place. */
 const popupTypeAddNewPlace = document.querySelector('.popup_type_add-new-place');
 
+/* Данные для api проекта "mesto" */
 const cohort = 'cohort-28';
 const token = 'b5931bc5-3874-4455-9cea-b058f66f7d9b';
 const baseUrl = 'https://mesto.nomoreparties.co/v1/'
+
+/* Текст кнопок модальных окон, при отправке запросов */
+const textSave = "Сохранить";
+const textSaveLoading = "Сохранить...";
+const textCreate = "Создать";
+const textCreateLoading = "Создать..."
 
 export {
   validateConfig,
@@ -40,5 +47,9 @@ export {
   popupTypeAddNewPlace,
   cohort,
   token,
-  baseUrl
+  baseUrl,
+  textSave,
+  textSaveLoading,
+  textCreate,
+  textCreateLoading
 };
