@@ -194,7 +194,7 @@ buttonAddNewPlace.addEventListener('click', () => {
 
 /** Событие при загрузке страницы. */
 document.addEventListener('DOMContentLoaded', () => {
-  api.getPageInformation()
+  Promise.all([api.getUserInformation(), api.getCards()])
     .then((data) => {
       // data[0] - данные пользователя
       userInfo.setUserAvatar(data[0].avatar);

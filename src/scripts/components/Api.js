@@ -41,7 +41,7 @@ export default class Api {
       .then(this._checkResponse)
   }
 
-  _getUserInformation() {
+  getUserInformation() {
     return fetch(`${this._baseUrl}${this._cohort}/users/me`, {
       headers: {
         authorization: this._token
@@ -50,20 +50,13 @@ export default class Api {
       .then(this._checkResponse)
   }
 
-  _getCards() {
+  getCards() {
     return fetch(`${this._baseUrl}${this._cohort}/cards`, {
       headers: {
         authorization: this._token
       }
     })
       .then(this._checkResponse)
-  }
-
-  getPageInformation() {
-    return Promise.all([
-      this._getUserInformation(),
-      this._getCards()
-    ])
   }
 
   addCard(nameCard, linkCard) {
