@@ -12,7 +12,7 @@
 **Установка проекта**
 
 - Склонировать проект в локальный репозиторий:
-    `git clone git@github.com:MaximArzhanov/mesto.git`
+    `git clone https://github.com/MaximArzhanov/mesto.git`
 
 - Установить зависимости:
     `npm ci`
