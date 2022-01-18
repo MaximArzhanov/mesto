@@ -20,4 +20,4 @@
 - Собрать проект:
     `npm run build`
 
-[Ссылка на cайт проекта Место](https://maximarzhanov.github.io/mesto/)
+[Ссылка на cайт проекта Место](http://lazy-hydrant.surge.sh.mesto-arzhanov-maxim.surge.sh/)
