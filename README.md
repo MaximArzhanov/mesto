@@ -15,7 +15,7 @@
     `git clone git@github.com:MaximArzhanov/mesto.git`
 
 - Установить зависимости:
-    `git ci`
+    `npm ci`
 
 - Собрать проект:
     `npm run build`
