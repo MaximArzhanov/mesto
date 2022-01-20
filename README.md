@@ -13,12 +13,15 @@ Babel, PostCSS, Autoprefixer, CSSnano.
 **Установка проекта**
 
 - Склонировать проект в локальный репозиторий:
+
     `git clone https://github.com/MaximArzhanov/mesto.git`
 
 - Установить зависимости:
+
     `npm ci`
 
 - Собрать проект:
+
     `npm run build`
 
 Проект завершён
