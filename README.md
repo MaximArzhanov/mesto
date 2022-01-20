@@ -24,6 +24,6 @@ Babel, PostCSS, Autoprefixer, CSSnano.
 
     `npm run build`
 
-Проект завершён
+Проект завершён. Доработка не планируется.
 
 [Ссылка на проект](http://lazy-hydrant.surge.sh.mesto-arzhanov-maxim.surge.sh/)
